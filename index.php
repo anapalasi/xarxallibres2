@@ -1,9 +1,9 @@
 <?php
 
 	require 'admin/config.php';
-	require 'functions.php';
+//	require 'functions.php';
 
-	$errores='';
+/*	$errores='';
 
 	if ($_SERVER['REQUEST_METHOD']=='POST'){
 		$usuario=$_POST['usuario'];
@@ -29,7 +29,7 @@
 			$errores .= '<li class="error"> Tu usuario y/o contraseña son incorrectos </li>';
 		}
 	}
-
+ */
 	require 'views/login.view.php';
 
 

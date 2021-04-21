@@ -12,8 +12,8 @@ function conexion($bd_config){
 	}
 // Evita inyecciones de codigo
 	function limpiarDatos($datos){
+		$datos=htmlspecialchars($datos); 
 		$datos=trim($datos); // Evita espacios en blanco
-		$datos=htmlspecialchars($datos); //Transforma los signos en texto
 		$datos=filter_var($datos, 'FILTER_SANITIZE_STRING'); //Se borran los caracteres especiales
 		return $datos;
 	}
