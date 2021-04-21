@@ -13,15 +13,23 @@
 		$conexion=conexion($bd_config);
 
 		$statement=$conexion->prepare('select * from Profesor where usuario= :usuario and password= :password');
-		$statement->execute([
+		$statement->execute(array(
 			':usuario' => $usuario,
 			':password' => $password
-		]);
+		));
 
 		$resultado = $statement->fetch();
 
 		// Minuto 6
+		if (resultado !== false){
+			$_SESSION['usuario']= $usuario;
+			header('Location: ' . RUTA. 'index.php');
+		}
+		else {
+			$errores .= '<li class="error"> Tu usuario y/o contraseña son incorrectos </li>';
+		}
 	}
+
 	require 'views/login.view.php';
 
 
