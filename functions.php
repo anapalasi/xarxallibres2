@@ -10,11 +10,19 @@ function conexion($bd_config){
 	catch (PDOException $e){
 		return false;
 	}
+}
 // Evita inyecciones de codigo
 	function limpiarDatos($datos){
 		$datos=htmlspecialchars($datos); 
 		$datos=trim($datos); // Evita espacios en blanco
 		$datos=filter_var($datos, 'FILTER_SANITIZE_STRING'); //Se borran los caracteres especiales
 		return $datos;
+	}
+
+	function iniciarSession ($table, $conexion)
+	{
+		$statement = $conexion->prepare("SELECT * from $table");
+		$statement->execute();
+		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
 ?>

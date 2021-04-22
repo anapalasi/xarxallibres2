@@ -20,6 +20,11 @@
 				<i class="fa fa-lock icons" aria-hidden="false"> </i>
 				<input type="text" name="password" placeholder="Contraseña" class="form-control">
 			</div>
+			<ul>
+				<?php if(!empty($errores)): ?>
+				<?php echo $errores ?>
+				<?php endif; ?>
+			</ul>
 			<button type="submit" name="submit" class="btn btn-flat-green">Entrar</button>
 		</form>
 	</div>
