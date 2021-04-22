@@ -10,6 +10,7 @@
 </head>
 <body class="bg-image">
 	<h1 align="center" class="texto"> Login Xarxa Llibres </h1>
+	<center><img src="img/xarxa_llibres-300x150.png" alt="logo xarxa llibres"> </center>
 	<div class="container">
 		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 			<p class="texto">Introdueix l'usuari i la contrasenya (recorda que l'usuari es NIF amb un 0 davant) </p>
