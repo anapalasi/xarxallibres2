@@ -9,9 +9,11 @@
 
 </head>
 <body class="bg-image">
-	<h1 align="center"> Login Xarxa Llibres </h1>
+	<h1 align="center" class="texto"> Login Xarxa Llibres </h1>
 	<div class="container">
 		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+			<p class="texto">Introdueix l'usuari i la contrasenya (recorda que l'usuari es NIF amb un 0 davant) </p>
+			<br>
 			<div class="input-group">
 				<i class="fa fa-user-o icons aria-hidden="false"></i>
 				<input type="text" name="usuario" placeholder="Usuario" class="form-control">
