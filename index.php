@@ -15,7 +15,7 @@
 		if ($usuario['rol'] == 'administrador'){
 			header('Location: admin.php');
 		}
-		elseif ($usuario['rol'] == 'usuario'){
+		elseif ($usuario['rol'] == 'usuari'){
 			header('Location: usuario.php');
 		}
 		else{
@@ -23,6 +23,7 @@
 		}
 	}
 	else {
+		
 		header('Location: login.php');
 	}
 ?>
