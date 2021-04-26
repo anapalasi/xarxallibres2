@@ -1,5 +1,8 @@
 <?php 
 
+	// Inicializamos la sesion
+	session_start();
+
 	require 'admin/config.php';
 	require 'functions.php';
 
@@ -28,12 +31,14 @@
 
 		if ($resultado !== false)
 		{
-			$_SESSION['usuario'] =$usuario;
+		
+			$_SESSION['usuario']=$usuario;
+//			$errores = $_SESSION['usuario'];
 			header('Location: index.php');
+			
 		}
 		else
 		{
-
 			$errores='<li class="error"> Tu usuario y/o contraseña son incorrectos</li>';
 		}	
 	}
