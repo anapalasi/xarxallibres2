@@ -7,10 +7,10 @@
 
 	// Comprobar sesion
 	if (isset($_SESSION['usuario'])){
-
 		// Validar los datos por privilegio
 		$conexion= conexion($bd_config);
 		$usuario= iniciarSession('Profesor', $conexion);
+
 
 		if ($usuario['rol'] == 'administrador'){
 			header('Location: admin.php');
@@ -23,7 +23,7 @@
 		}
 	}
 	else {
-		
+				
 		header('Location: login.php');
 	}
 ?>

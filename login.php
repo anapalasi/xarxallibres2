@@ -33,7 +33,7 @@
 		{
 		
 			$_SESSION['usuario']=$usuario;
-//			$errores = $_SESSION['usuario'];
+			//$errores = $_SESSION['usuario'];
 			header('Location: index.php');
 			
 		}

@@ -21,7 +21,7 @@ function conexion($bd_config){
 
 	function iniciarSession ($table, $conexion)
 	{
-		$statement = $conexion->prepare("SELECT * from $table where usuario = :usuario");
+		$statement = $conexion->prepare("SELECT * from $table where dni = :usuario");
 		$statement->execute([':usuario' => $_SESSION['usuario']]);
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
