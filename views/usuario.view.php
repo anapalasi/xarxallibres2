@@ -10,5 +10,6 @@
 </head>
 <body>
 <h1> Bienvenido Usuario </h1>
+    <a href="<?php echo RUTA.'close.php' ?>">Cerrar Sesion</a>
 </body>
 </html>
