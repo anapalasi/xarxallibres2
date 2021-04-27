@@ -14,7 +14,7 @@
   $admin= iniciarSession('Profesor',$conexion);
   
   if ($admin == 'administrador'){
-    require 'views/admin.php'
+    require 'views/admin.view.php'
   }
   else {
     header('Location:index.php');
