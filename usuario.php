@@ -13,7 +13,7 @@
   $conexion = conexion($bd_config);
   $user= iniciarSession('Profesor',$conexion);
   
-  if ($user == 'usuari'){
+  if ($user['rol'] == 'usuari'){
     require 'views/usuario.view.php'
   }
   else {
