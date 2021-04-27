@@ -21,7 +21,7 @@
 			</div>
 			<div class="input-group">
 				<i class="fa fa-lock icons" aria-hidden="false"> </i>
-				<input type="text" name="password" placeholder="Contraseña" class="form-control">
+				<input type="password" name="password" placeholder="Contraseña" class="form-control">
 			</div>
 			<ul>
 				<?php if(!empty($errores)): ?>
