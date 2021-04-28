@@ -11,13 +11,13 @@
   <title>Bienvenido Usuario</title>
 </head>
 <body class="bg-image">
-  <h1>Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
-   <h2> Pots fer aquestes operacions </h2>
+  <h1 class="texto" align="center">Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
+   <h2 class="texto"> Pots fer aquestes operacions </h2> <br>
    <ul> 
-	<li> <a href="valorar.php"> Valorar llibres</a> </li>
+	<li> <a href="valorar.php"> Valorar llibres</a> </li><br>
 	<?php
 		if ($tutor != "") 
-			 echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
+			 echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li><br>";
 
 	?>
    </ul>
