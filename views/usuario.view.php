@@ -1,14 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bienvenido Administrador</title>
+  <title>Bienvenido Usuario</title>
 </head>
 <body>
-  <h1>Bienvenido< ?php echo utf8_encode($user['nombre']). " " . utf8_encode($user['apellido1']); ?></h1>
-  <a href="close.php'">Cerrar Sesion</a>
+  <h1>Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
+  <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>
-
