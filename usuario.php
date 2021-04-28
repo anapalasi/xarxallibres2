@@ -1,22 +1,23 @@
-<?php
-  // Abrimos la sesion
-  session_start();
-  
-  require 'admin/config.php'
-  require 'functions.php'
-  
-  // Comprobamos la sesión
-  if (!isset($_SESSION['usuario'])){
-    header('Location:login.php');
-  }
-  
-  $conexion = conexion($bd_config);
-  $user= iniciarSession('Profesor',$conexion);
-  
-  if ($user['rol'] == 'usuari'){
-    require 'views/usuario.view.php'
-  }
-  else {
-    header('Location:index.php');
-  }
-?>
+<?php session_start();
+
+require 'admin/config.php';
+require 'functions.php';
+
+// comprobar session
+if (!isset($_SESSION['usuario'])) {
+  header('Location: login.php');
+}
+
+$conexion = conexion($bd_config);
+$user = iniciarSession('usuarios', $conexion);
+
+if ($user['tipo_usuario'] == 'usuario') {
+  // traer el nombre del usuario
+  $user = iniciarSession('usuarios', $conexion);
+
+
+  require 'views/usuario.view.php';
+} else {
+  header('Location: index.php');
+}
+

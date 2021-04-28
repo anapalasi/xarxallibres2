@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Usuario</title>
+  <title>Bienvenido Administrador</title>
 </head>
 <body>
-<h1> Bienvenido Usuario </h1>
-    <a href="<?php echo RUTA.'close.php' ?>">Cerrar Sesion</a>
+  <h1>Bienvenido< ?php echo utf8_encode($user['nombre']). " " . utf8_encode($user['apellido1']); ?></h1>
+  <a href="close.php'">Cerrar Sesion</a>
 </body>
 </html>
+
