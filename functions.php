@@ -25,4 +25,11 @@ function conexion($bd_config){
 		$statement->execute([':usuario' => $_SESSION['usuario']]);
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
+
+	/* Funcion que comprueba si el usuario es tutor de un grupo*/
+	function esTutor($conexion){
+		$statement = $conexion->prepare("SELECT * FROM Tutoria  where dni_tutor = :dni");
+		$statement->execute([ ':dni' => $_SESSION['usuario']]);
+	 	return	$statement->fetch(PDO::FETCH_ASSOC);
+	}
 ?>

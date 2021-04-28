@@ -9,12 +9,19 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $conexion = conexion($bd_config);
-$user = iniciarSession('usuarios', $conexion);
+$user = iniciarSession('Profesor', $conexion);
 
-if ($user['tipo_usuario'] == 'usuario') {
+if ($user['rol'] == 'usuari') {
   // traer el nombre del usuario
-  $user = iniciarSession('usuarios', $conexion);
+  $user = iniciarSession('Profesor', $conexion);
+  $DatosTutoria = esTutor($conexion);
 
+  if ($DatosTutoria != NULL){
+
+	  $tutor="Recollida llibres tutoria " . $DatosTutoria['descripcion'];
+	  // Guardamos el id de la tutoria
+	  $_SESSION['id_tutoria']=$DatosTutoria['id_tutoria'];
+  }
 
   require 'views/usuario.view.php';
 } else {

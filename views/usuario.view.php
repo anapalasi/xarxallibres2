@@ -9,6 +9,11 @@
 </head>
 <body>
   <h1>Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
-  <a href="close.php">Cerrar Sesion</a>
+   <h2> Pots fer aquestes operacions </h2>
+   <ul> 
+	<li> <a href="valorar.php"> Valorar llibres</a> </li>
+	<li> <?php echo $tutor;?>
+   </ul>
+   <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>
