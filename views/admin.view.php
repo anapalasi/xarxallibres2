@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
-  <a href="close.php">Cerrar Sesion</a
+  <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>
 
