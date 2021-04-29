@@ -19,9 +19,10 @@
 		echo "<br><p> No tienes grupos con libros </p><br><br>";
 	}
 	else {
-		echo "<ul>";
+
+		echo "<br><br><ul>";
 		foreach ($grupos as $grupo){
-			echo "<li> " . $grupo['id_grupo']. "</li>";
+			echo "<li> Valoraci&oacute; llibres: " . utf8_encode($grupo['descripcion']). "</li>";
 		}
 		echo "</ul>";
 

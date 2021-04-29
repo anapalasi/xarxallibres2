@@ -10,10 +10,6 @@
 
         $conexion = conexion($bd_config);
 	$grupos = GrupoLibro($conexion, $_SESSION['usuario']);
-	foreach ($grupos as $val) {
-		echo $val['descripcion'];
-		echo "<br>";	
-	}
-//	require 'views/valorar.view.php';
+	require 'views/valorar.view.php';
 
 ?>
