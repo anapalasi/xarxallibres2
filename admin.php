@@ -15,10 +15,18 @@
 	  // traer el nombre del usuario
 	  $user = iniciarSession('Profesor', $conexion);
 
+	  $DatosTutoria = esTutor($conexion);
+
+	  if ($DatosTutoria != NULL){
+	
+        	  $tutor="Recollida llibres tutoria " . $DatosTutoria['descripcion'];
+          	// Guardamos el id de la tutoria
+         	 $_SESSION['id_tutoria']=$DatosTutoria['id_tutoria'];
+  	}
 
 	  require 'views/admin.view.php';
 	} else {
-	  header('Location: '.RUTA.'index.php');
+	  header('Location: index.php');
 	}
 
  ?>
