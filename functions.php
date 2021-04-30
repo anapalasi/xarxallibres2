@@ -40,4 +40,11 @@ function conexion($bd_config){
 		$statement->execute([ ':dni' => $dni ]);
 	 	return	$statement->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	/* Funcio que obte les dades d'un grup*/
+	function dadesGrup($conexion, $grup){
+		$sentencia = "SELECT * from Grupo where id_grupo = :grupo";
+		$statement = $conexion->prepare($sentencia);
+		$s
+	}
 ?>
