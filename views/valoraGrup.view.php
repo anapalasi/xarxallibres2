@@ -16,7 +16,7 @@
   <br>
   <?php
 	foreach ($llibres as $llibre){
-		echo utf8_encode($llibre["nombre"]). " " . utf8_encode($llibre["apellido1"]). " " . utf8_encode($llibre["apellido2"]);
+		echo utf8_encode($llibre["nombre"]). " " . utf8_encode($llibre["apellido1"]). " " . utf8_encode($llibre["apellido2"]). " " . $llibre["volumen_libro"] . " " . $llibre["puntos"];
 //		echo $llibre["nombre"]. " " . $llibre["apellido1"]. " " . $llibre["apellido2"];
 		echo "<br>";
 
