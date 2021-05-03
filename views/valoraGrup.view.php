@@ -12,7 +12,17 @@
 <body class="bg-image">
   <h1 align="center" class="texto"> Valoracio de llibres del grup  </h1>
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-  <h2 class="texto">Llistat d'alumnes </h2>
+  <h2 class="texto">Llistat d'alumnes de <?php echo utf8_encode($grup['descripcion']); ?> </h2>
+  <br>
+  <?php
+	foreach ($llibres as $llibre){
+		echo utf8_encode($llibre["nombre"]). " " . utf8_encode($llibre["apellido1"]). " " . utf8_encode($llibre["apellido2"]);
+//		echo $llibre["nombre"]. " " . $llibre["apellido1"]. " " . $llibre["apellido2"];
+		echo "<br>";
+
+	}
+?>
+
   <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>

@@ -8,8 +8,10 @@
                 header('Location: login.php');
         }
 
-        $conexion = conexion($bd_config);
-	$grupos = dadesGrup($conexion, $_GET['grup']);
+	$conexion = conexion($bd_config);
+	$id_grup= $_GET["grup"];
+	$grup = dadesGrup($conexion,$id_grup);
+	$llibres=mostraLlibres($conexion, $id_grup);
 	require 'views/valoraGrup.view.php';
 
 ?>

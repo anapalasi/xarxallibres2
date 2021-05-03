@@ -45,6 +45,15 @@ function conexion($bd_config){
 	function dadesGrup($conexion, $grup){
 		$sentencia = "SELECT * from Grupo where id_grupo = :grupo";
 		$statement = $conexion->prepare($sentencia);
-		$s
+		$statement->execute([ ':grupo' => $grup]);
+		return $statement->fetch(PDO::FETCH_ASSOC);
+	}
+
+	/* Funcio que mostra els llibres d'un grup */
+	function mostraLlibres($conexion, $grup){
+		$sentencia = "SELECT A.nombre, A.apellido1, A.apellido2  from AlumnoGrupo AG, Alumno A where AG.nia = A.nia and id_grupo = :grupo order by A.apellido1, A.apellido2, A. nombre";
+		$statement = $conexion->prepare($sentencia);
+		$statement->execute([ ':grupo' => $grup]);
+		return $statement->fetchAll(PDO::FETCH_ASSOC);
 	}
 ?>
