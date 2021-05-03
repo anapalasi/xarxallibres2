@@ -51,7 +51,7 @@ function conexion($bd_config){
 
 	/* Funcio que mostra els llibres d'un grup */
 	function mostraLlibres($conexion, $grup){
-		$sentencia = "SELECT A.nombre, A.apellido1, A.apellido2,E.volumen_libro, E.puntos  from AlumnoGrupo AG, Alumno A, Grupo G, Libro L where AG.nia = A.nia and AG.id_grupo= G.id_grupo and L.id_asignatura=G.id_asignatura and E.isbn_libro = L.isbn and E.id_lote = A.id_lote  and  AG.id_grupo = :grupo order by A.apellido1, A.apellido2, A. nombre";
+		$sentencia = "SELECT A.nombre, A.apellido1, A.apellido2,E.volumen_libro as volumen, E.puntos as puntos  from AlumnoGrupo AG, Alumno A, Grupo G, Libro L, Ejemplar E where AG.nia = A.nia and AG.id_grupo= G.id_grupo and L.id_asignatura=G.id_asignatura and E.isbn_libro = L.isbn and E.id_lote = A.id_lote  and  AG.id_grupo = :grupo order by A.apellido1, A.apellido2, A. nombre";
 		$statement = $conexion->prepare($sentencia);
 		$statement->execute([ ':grupo' => $grup]);
 		return $statement->fetchAll(PDO::FETCH_ASSOC);
