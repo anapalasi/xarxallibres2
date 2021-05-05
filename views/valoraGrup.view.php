@@ -15,13 +15,33 @@
   <h2 class="texto">Llistat d'alumnes de <?php echo utf8_encode($grup['descripcion']); ?> </h2>
   <br>
   <form action="actualizaPuntuacion.php" method="post">
-  <table border="1" align="center">
-  <tr><th> Nombre </th> </th> Apellidos </th><
+  <table border="1" align="center" bgcolor="white" width="70%">
+
+  <tr><th> Nom </th> <th> Cognoms </th><th> Exemplar </th><th> Volum </th> <th> Estat </th></tr>
   <?php
 	foreach ($llibres as $llibre){
-	
-		echo utf8_encode($llibre["nombre"]) . " " . utf8_encode($llibre["apellido1"]). " " . utf8_encode($llibre["apellido2"]). " ". $llibre["ejemplar"] . " " . $llibre["volumen"]. " ". $llibre["puntos"];
-		echo "<br>";
+		echo "<tr><td>";
+		echo utf8_encode($llibre["nombre"]);
+	        echo "</td> <td>";
+		echo utf8_encode($llibre["apellido1"]). " " . utf8_encode($llibre["apellido2"]);
+	        echo "</td><td>";
+		echo $llibre["ejemplar"];
+	        echo "</td><td>";
+		echo $llibre["volumen"];
+		echo "</td><td>";
+		if ($llibre["puntos"] == 3)
+			echo "MB";
+		else {
+			if ($llibre["puntos"]==2){
+				echo "B";
+			}
+			else{
+				if ($llibre["puntos"] == 1){
+					echo "R";
+				}
+			}
+		}
+		echo "</td></tr>";
 
 	}
 ?>
