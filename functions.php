@@ -35,7 +35,7 @@ function conexion($bd_config){
 
 	/* Funcion que extrae datos de los grupos donde el profesor tiene libros a valorar */
 	function GrupoLibro($conexion, $dni){
-		$sentencia= "SELECT G.id_grupo, descripcion from Grupo G, GrupoProfesor GP, Libro L where G.id_grupo = GP.id_grupo and G.id_asignatura = L.id_asignatura and GP.dni= :dni";
+		$sentencia= "SELECT distinct G.id_grupo, descripcion from Grupo G, GrupoProfesor GP, Libro L where G.id_grupo = GP.id_grupo and G.id_asignatura = L.id_asignatura and GP.dni= :dni";
 		$statement = $conexion->prepare($sentencia);
 		$statement->execute([ ':dni' => $dni ]);
 	 	return	$statement->fetchAll(PDO::FETCH_ASSOC);
