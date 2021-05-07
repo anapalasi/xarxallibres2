@@ -56,4 +56,11 @@ function conexion($bd_config){
 		$statement->execute([ ':grupo' => $grup]);
 		return $statement->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	/* Funcio que executa una sentencia  en la base de dades sense parametres */
+	function executaSentencia($conexion, $sentencia){
+		$statement = $conexion->prepare($sentencia);
+		$statement->execute();
+		return $statement->fetch(PDO::FETCH_ASSOC);
+	}
 ?>

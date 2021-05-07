@@ -21,13 +21,16 @@
 <?php
 	foreach ($llibres as $llibre){
 
-                echo  "<tr align=\"center\"><td>" . utf8_encode($llibre["nombre"]) . "</td> <td>" . utf8_encode($llibre["apellido1"]);
+		echo  "<tr align=\"center\"><td>";
+
+		echo "<input type=\"hidden\" name=\"ejemplar[]\" value=\"";
+		echo $llibre["ejemplar"];
+		echo "\">";
+	       	echo  utf8_encode($llibre["nombre"]) . "</td> <td>" . utf8_encode($llibre["apellido1"]);
                 echo  " " . utf8_encode($llibre["apellido2"]) ."</td><td>";
                 echo  $llibre["ejemplar"] . "</td><td>";
 		echo  $llibre["volumen"] . "</td><td>";
-		echo "<select name=\"";
-		echo $llibre["ejemplar"];
-		echo "\">";
+		echo "<select name=\"estat[]\">";
 		echo "<option value=\"3\" ";
 		if ($llibre["puntos"] == "3")
 			echo "selected";
