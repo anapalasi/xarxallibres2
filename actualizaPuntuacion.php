@@ -14,5 +14,7 @@
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		$resultat = executaSentencia($conexion,$sql);
 	}
+        $usuario= iniciarSession('Profesor', $conexion); // Obtenemos el rol del usuario
+
 	require 'views/actualizaPuntuacion.view.php';
 ?>
