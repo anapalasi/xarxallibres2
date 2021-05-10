@@ -63,4 +63,32 @@ function conexion($bd_config){
 		$statement->execute();
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
+
+	function executaSentenciaTotsResultats($conexion, $sentencia){
+		$statement = $conexion->prepare($sentencia);
+		$statement->execute();
+		return $statement->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/* Funcio que obte les observacions d'un grup */
+	/*function observacionsExemplars ($conexion, $grup){
+		$sentencia = " select * from ObservacionEjemplar where id_ejemplar in ( select E.id_ejemplar from Ejemplar E, Lote L, Alumno A, AlumnoGrupo where E.id_lote = L.id_lote and A.id_lote = L.id_lote and A.nia = AG.nia and AG.id_grupo = :grupo";
+		$statement = $conexion->prepare($sentencia);
+		$statement->execute([ ':grupo' => $grup]);
+		return $statement->fetchAll(PDO:FETCH_ASSOC);
+	}*/
+
+	/* Funcio que busca si un exemplar te una observacio. Torna true si esta i false si no esta */
+	/*function ObservacioExemplar ($llista_observacions, $id_ejemplar, $observacio){
+		$esta=False;
+
+		foreach ($llista_observacions as $obs){
+			if ($llista_observacions["id_ejemplar"] == $id_ejemplar and $llista_observacions["id_observacion"] == $observacio){
+				$esta = True;
+				break;
+			}
+		}
+		return $esta;
+
+	}*/
 ?>

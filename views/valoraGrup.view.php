@@ -14,10 +14,10 @@
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
   <h2 class="texto">Llistat d'alumnes de <?php echo utf8_encode($grup['descripcion']); ?> </h2>
   <br>
-  <form action="actualizaPuntuacion.php" method="post">
-  <table border="1" align="center" bgcolor="white" width="70%">
+  <form action="actualizaPuntuacion.php" method="post" width="100%">
+  <table border="1" align="center" bgcolor="white" width="100%">
 
-  <tr><th> Nom </th> <th> Cognoms </th><th> Exemplar </th><th> Volum </th> <th> Estat </th></tr>
+  <tr><th> Nom </th> <th> Cognoms </th><th> Exemplar </th><th> Volum </th> <th> Estat </th> <th> Observacions </th></tr>
 <?php
 	foreach ($llibres as $llibre){
 
@@ -50,6 +50,14 @@
 
 
 		echo "</select>";
+		echo "<td>";
+		foreach ($observacions as $observacio){
+			echo "<input type=\"checkbox\" value=\"";
+			echo $observacio["id_observacion"];
+			echo "\">";
+			echo utf8_encode($observacio["descripcion"]);
+			echo "<br>";	
+		}
                echo   "</td></tr>";
         }
 
