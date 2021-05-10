@@ -21,7 +21,13 @@
 		array_push($llista_exemplars,$llibre["ejemplar"]);
 	}
 
-	//	$observacionsExemplars= observacionsExemplars($conexion, $id_grup);
+	// Obtindrem les observacions de cada exemplar
+	$observacionsExemplars = array();
+	foreach ($llista_exemplars as $exemplar){
+		$obs=array();
+		$llista = observacionsExemplar($conexion, $exemplar);
+		// Comprovem que la llista no estiga buida		
+	}
 	require 'views/valoraGrup.view.php';
 
 ?>
