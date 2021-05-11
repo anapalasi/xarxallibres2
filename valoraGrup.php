@@ -27,8 +27,8 @@
 
 		// Crearem un array on el primer element siga l'identificador d'exemplar i el segon element una llista d'observacions
 		// [1ESO_ANG_1, [2,3,6]]
-		$obs=array();
-		array_push($obs, $exemplar);
+	//	$obs=array();
+	//	array_push($obs, $exemplar);
 		
 		$llista_incidencies = array();
 
@@ -38,9 +38,10 @@
 		}
 
 		// Afegirem les incidencies a la llista		
-		array_push($obs, $llista_incidencies);
+	//	array_push($obs, $llista_incidencies);
 		//Afegirem les incidencies a les observacions
-		array_push($observacionsExemplars, $obs);
+		//array_push($observacionsExemplars, $obs);
+		$observacionsExemplars[$exemplar] = $llista_incidencies;
 
 	}
 	require 'views/valoraGrup.view.php';

@@ -78,4 +78,5 @@ function conexion($bd_config){
                 return $statement->fetchAll(PDO::FETCH_ASSOC);
 
 	}
+
 ?>
