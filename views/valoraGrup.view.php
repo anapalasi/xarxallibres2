@@ -51,9 +51,11 @@
 
 		echo "</select>";
 		echo "<td>";
+
 		foreach ($observacions as $observacio){
 			echo "<input type=\"checkbox\" value=\"";
 			echo $observacio["id_observacion"];
+			// Comprovaremos si esta seleccionat a la base de dades
 			echo "\">";
 			echo utf8_encode($observacio["descripcion"]);
 			echo "<br>";	

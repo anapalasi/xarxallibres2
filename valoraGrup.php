@@ -24,9 +24,24 @@
 	// Obtindrem les observacions de cada exemplar
 	$observacionsExemplars = array();
 	foreach ($llista_exemplars as $exemplar){
+
+		// Crearem un array on el primer element siga l'identificador d'exemplar i el segon element una llista d'observacions
+		// [1ESO_ANG_1, [2,3,6]]
 		$obs=array();
+		array_push($obs, $exemplar);
+		
+		$llista_incidencies = array();
+
 		$llista = observacionsExemplar($conexion, $exemplar);
-		// Comprovem que la llista no estiga buida		
+		foreach ($llista as $incidencia){
+			array_push($llista_incidencies,$incidencia["id_observacion"]);
+		}
+
+		// Afegirem les incidencies a la llista		
+		array_push($obs, $llista_incidencies);
+		//Afegirem les incidencies a les observacions
+		array_push($observacionsExemplars, $obs);
+
 	}
 	require 'views/valoraGrup.view.php';
 
