@@ -34,10 +34,8 @@
 		$llista_incidencies = array();
 
 		$llista = observacionsExemplar($conexion, $exemplar);
-                
 		foreach ($llista as $incidencia){
 			array_push($llista_incidencies,$incidencia["id_observacion"]);
-                        echo $incidencies["id_observacion"];
 		}
 
 		// Afegirem les incidencies a la llista		
