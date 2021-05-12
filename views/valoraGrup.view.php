@@ -20,7 +20,8 @@
   <tr><th> Nom </th> <th> Cognoms </th><th> Exemplar </th><th> Volum </th> <th> Estat </th> <th> Observacions </th></tr>
 <?php
 	foreach ($llibres as $llibre){
-
+		
+		$exemplar = $llibre["ejemplar"];
 		echo  "<tr align=\"center\"><td>";
 
 		echo "<input type=\"hidden\" name=\"ejemplar[]\" value=\"";
@@ -52,26 +53,28 @@
 		echo "</select>";
 		echo "<td>";
 		foreach ($observacions as $observacio){
+
+			// Emmagatzemem les observacions en una llista
+			$observacions_exemplar = $observacionsExemplars[$exemplar];
+			// Comprovem si esta buida
+			$buida = empty($observacions_exemplar);
 			echo "<input type=\"checkbox\" value=\"";
 			echo $observacio["id_observacion"];
-			// Comprovaremos si esta seleccionat a la base de dades
-			$encontrado = False;
-			echo empty($observacionsExemplars[$llibre["ejemplar"]]);
-	//		foreach ($observacionsExemplars[$llibre["ejemplar"]] as $valor)
-	//			echo $valor;
-			echo "\">";
-			/*if (not empty($observacionsExemplars[$llibre["ejemplar"]])){
-				foreach ($observacionsExemplars[$llibre["ejemplar"]] as $valor)
-					echo $valor;
+			echo "\"";
+			if (!$buida){
+				foreach ($observacions_exemplar as $obs){
+					//echo "Observacio actual " . $obs . " Observacio buscada " . $observacio["id_observacion"];
+					if (strcmp($obs,$observacio["id_observacion"])== 0)
+						echo " checked";
+				}
 			}
-			else
-			{
-				echo "vacio";
-			}*/
+			// Comprovaremos si esta seleccionat a la base de dades
+			echo ">";
 			echo utf8_encode($observacio["descripcion"]);
 			echo "<br>";	
 		}
-               echo   "</td></tr>";
+		echo   "</td></tr>";
+	
         }
 
 ?>
