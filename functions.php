@@ -73,9 +73,9 @@ function conexion($bd_config){
 	/* Funcio que obte les observacions d'un exemplar */
 	function observacionsExemplar($conexion, $exemplar){
 		$sentencia ="select id_observacion from ObservacionEjemplar where id_ejemplar = :exemplar order by id_observacion";	
-        	$statement = $conexion->prepare($sentencia);
-                $statement->execute([ ':exemplar' => $exemplar]);
-                return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $conexion->prepare($sentencia);
+        $statement->execute([ ':exemplar' => $exemplar]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
 
 	}
 
