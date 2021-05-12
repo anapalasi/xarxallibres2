@@ -58,7 +58,9 @@
 			$observacions_exemplar = $observacionsExemplars[$exemplar];
 			// Comprovem si esta buida
 			$buida = empty($observacions_exemplar);
-			echo "<input type=\"checkbox\" value=\"";
+			echo "<input type=\"checkbox\" name=\"observacions";
+			echo  $observacio["id_observacion"];
+			echo "[]\" value=\"";
 			echo $observacio["id_observacion"];
 			echo "\"";
 			if (!$buida){

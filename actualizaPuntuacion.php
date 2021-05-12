@@ -15,6 +15,14 @@
 		$resultat = executaSentencia($conexion,$sql);
 	}
         $usuario= iniciarSession('Profesor', $conexion); // Obtenemos el rol del usuario
-
+	
+	// Comprobaremos el numero de tipos de observaciones que hay
+	$sentencia = "select descripcion from Observacion where id_observacion !=0";
+	$numeroObservaciones = executaSentenciaTotsResultats($conexion,$sentencia);
+	
+	for ($i=1;$i<=count($numeroObservaciones);$i++){
+		$variable = "observacions".$i;
+	}	
+	
 	require 'views/actualizaPuntuacion.view.php';
 ?>
