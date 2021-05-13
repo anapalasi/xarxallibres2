@@ -18,24 +18,23 @@
 	$variable=array();
 	$num_observacions = count($numeroObservaciones);
 
-	for ($i=1;$i<=$num_observacions;$i++){
+	/*for ($i=1;$i<=$num_observacions;$i++){
 			$valor = "observacions" . strval($i);
 			array_push($variable, "observacions". strval($i));
-	}
+	}*/
 
 
-	foreach ($variable as $valor){
-			echo $valor . " <br>";
-			foreach ($_POST[$valor] as $aux)
-				echo $aux . " ";
 	
-	}		
-	echo "Fin";
+	
+			
+	
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		$resultat = executaSentencia($conexion,$sql);
 		$indice=1;
 		// Recorrem totes les possibles observacions
+		var_dump($_POST['ejemplar'][$i]);
+		var_dump($_POST['observacions'][$i]);
 		foreach ($variable as $valor)
 		{	
 			// Comprovarem si el valor se troba en la base de dades. En cas de que siga distint de cadena
