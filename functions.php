@@ -83,10 +83,7 @@ function conexion($bd_config){
 	function observacioRegistrada($conexion, $exemplar, $observacio)
 	{
 		$sentencia= "select * from ObservacionEjemplar where id_observacion =\"" . $observacio. "\" and id_ejemplar = \"" . $exemplar. "\"";
-		echo $sentencia;
-		$statement = $conexion->prepare($sentencia);
-		$statement->execute();
-		$resultat = $statement->fetch(PDO::FETCH_ASSOC);
-		return empty($resultat);
+		$resultat = executaSentencia($conexion, $sentencia); 
+		return $resultat["id_observacion"];
 	}
 ?>

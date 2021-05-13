@@ -23,26 +23,50 @@
 			array_push($variable, "observacions". strval($i));
 	}
 
-	
 
+	foreach ($variable as $valor){
+			echo $valor . " <br>";
+			foreach ($_POST[$valor] as $aux)
+				echo $aux . " ";
+	
+	}		
+	echo "Fin";
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		$resultat = executaSentencia($conexion,$sql);
 		$indice=1;
+		// Recorrem totes les possibles observacions
 		foreach ($variable as $valor)
-		{
+		{	
+			// Comprovarem si el valor se troba en la base de dades. En cas de que siga distint de cadena
+			// buida esta en la base de dades.
 			$esta=observacioRegistrada($conexion, $_POST['ejemplar'][$i], $indice);
-			echo $esta;
+			if ($esta != ""){
+				echo $valor;
+				echo "Valor base de dades: " . $esta . "-> ". !empty($_POST[$valor][$i]). " " . $i . "<br>";
+			}
+			
+			// Si estava marcat al formulari
+		/*	$esta_formulari = isset($POST[$valor][$i]);
+			if ($valor == $_POST[$valor][$i])
+				echo "Eureka";
+			echo $_POST['ejemplar'][$i]. " ". $valor. " Esta:". $esta_formulari . "<br>";	
 			if (!empty($_POST[$valor][$i])){
+				echo "Entra <br>"; 
 				// Si está activat hem de comprobar si ja estava inserit
-				echo "";
+				if (! $esta){
+					echo $valor . " " .$esta.  "No estava";
+				}					
 
 			}
 			else
 			{
 				// Comprovem si estava activat per desactivar-ho
-				echo "";
-			}
+				if ($esta){
+					echo $esta . "Cal esborrar-lo";
+				}
+				
+			}*/
 			$indice++;
 		}
 		
