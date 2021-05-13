@@ -28,18 +28,22 @@
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		$resultat = executaSentencia($conexion,$sql);
+		$indice=1;
 		foreach ($variable as $valor)
 		{
+			$esta=observacioRegistrada($conexion, $_POST['ejemplar'][$i], $indice);
+			echo $esta;
 			if (!empty($_POST[$valor][$i])){
 				// Si está activat hem de comprobar si ja estava inserit
-				echo "Activat ";
+				echo "";
+
 			}
 			else
 			{
 				// Comprovem si estava activat per desactivar-ho
-				echo "No activat ";
+				echo "";
 			}
-			
+			$indice++;
 		}
 		
 	}

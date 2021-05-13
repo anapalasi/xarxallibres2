@@ -79,4 +79,14 @@ function conexion($bd_config){
 
 	}
 
+	/* Funcio que indica si una observacio d'un exemplar es troba registrada o no */
+	function observacioRegistrada($conexion, $exemplar, $observacio)
+	{
+		$sentencia= "select * from ObservacionEjemplar where id_observacion =\"" . $observacio. "\" and id_ejemplar = \"" . $exemplar. "\"";
+		echo $sentencia;
+		$statement = $conexion->prepare($sentencia);
+		$statement->execute();
+		$resultat = $statement->fetch(PDO::FETCH_ASSOC);
+		return empty($resultat);
+	}
 ?>
