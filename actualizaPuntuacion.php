@@ -33,7 +33,6 @@
 		$resultat = executaSentencia($conexion,$sql);
 		$indice=1;
 		// Recorrem totes les possibles observacions
-		var_dump($_POST['ejemplar'][$i]);
 		var_dump($_POST['observacions'][$i]);
 		foreach ($variable as $valor)
 		{	

@@ -61,7 +61,7 @@
 			echo "<input type=\"checkbox\" name=\"observacions";
 		//	echo  $observacio["id_observacion"];
 			echo "[]\" value=\"";
-			echo $observacio["id_observacion"];
+			echo $llibre["ejemplar"]. "-" .$observacio["id_observacion"];
 			echo "\"";
 			if (!$buida){
 				foreach ($observacions_exemplar as $obs){
