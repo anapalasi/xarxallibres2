@@ -86,4 +86,19 @@ function conexion($bd_config){
 		$resultat = executaSentencia($conexion, $sentencia); 
 		return $resultat["id_observacion"];
 	}
+
+	/* Funcio que obté totes les observacions */
+	function obteObservacions ($conexion)
+	{
+		$sentencia = "select * from ObservacionEjemplar";
+		$resultat = executaSentenciaTotsResultats($conexion,$sentencia);
+		$array_observacions = array();
+		foreach ($resultat as $observacio)
+		{
+			$cadena = $observacio["id_ejemplar"]. "-". $observacio["id_observacion"];
+			array_push($array_observacions, $cadena);
+		}
+		
+		return $array_observacions;
+	}
 ?>

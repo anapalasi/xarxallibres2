@@ -18,13 +18,8 @@
 	$variable=array();
 	$num_observacions = count($numeroObservaciones);
 
-	/*for ($i=1;$i<=$num_observacions;$i++){
-			$valor = "observacions" . strval($i);
-			array_push($variable, "observacions". strval($i));
-	}*/
-
-
-	
+	// Obtenim totes les observacions
+	$llistat_observacions = obteObservacions($conexion);
 	
 			
 	
