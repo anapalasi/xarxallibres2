@@ -101,4 +101,17 @@ function conexion($bd_config){
 		
 		return $array_observacions;
 	}
+
+	/*Funcio que indica si una cadena es troba en un array */
+	function estaEnArray($lista, $cadena){
+		$encontrado = False;
+
+		foreach ($lista as $elemento){
+			if (strcmp($elemento, $cadena) == 0){
+				$encontrado = True;
+				break;
+			}
+		}
+		return $encontrado;
+	}
 ?>

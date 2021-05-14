@@ -24,28 +24,46 @@
 	// Observacions formulari
 	$observacions_formulari = array();
 
-
+	// Array amb els exemplars del curs. L'usarem despres per veure si les observacions son d'eixe curs
+	$exemplars=array();
 
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
+		array_push($exemplars,$_POST['ejemplar'][$i]);
 		$resultat = executaSentencia($conexion,$sql);
 		$indice=1;
 		// Si la observacio es diferent de NULL aleshores s'afig a l'array corresponent
 		if ($_POST['observacions'][$i])
 			array_push($observacions_formulari, $_POST['observacions'][$i]);
 	}
-    
-    /* Comprovem si les observacions guardades es mantenen i si no les esborrem */
+    	/* Comprovem si les observacions guardades es mantenen i si no les esborrem */
 	foreach ($llistat_observacions as $guardada){
-		// Si no está les esborrarem
-		if (!in_array($guardada, $observacions_formulari))
-			echo $guardada . "s'ha esborrat";
+		// Dividim amb el caracter separador. parts[0] seria l'exemplar i part[1] l'observacio
+		$parts = explode("-",$guardada); 
+
+		// Comprovem que l'observacio pertany a aquest curs
+		if (estaEnArray($exemplars,$parts[0]))
+		{
+			// Si ja no estan al formulari s'han d'esborrar
+			if (! in_array($guardada, $observacions_formulari)){
+				$sentencia = "DELETE FROM ObservacionEjemplar WHERE id_ejemplar=\"" . $parts[0]. "\" and id_observacion=\"". $parts[1]."\"";
+				executaSentencia($conexion, $sentencia);	
+			}
+		}
+			
+		
 	}
 
 	/* Comprovem si les observacions del formulari estaven ja guardades i si no les inserirem */
 	foreach ($observacions_formulari as $nova_obs){
-		if (! in_array($nova_obs, $llistat_observacions))
-			echo $nova_obs . "s'ha inserit";
+		//Dividim amb el caracter separador
+		$parts = explode("-",$nova_obs);
+		
+		// Si no es troba en els llistats guardats hem d'inserir-la
+		if (! in_array($nova_obs, $llistat_observacions)){
+			$sentencia = "INSERT INTO ObservacionEjemplar (id_ejemplar, id_observacion) VALUES (\"". $parts[0]. "\",". $parts[1]. ")"; 
+			executaSentencia($conexion, $sentencia);	
+		}
 	}
 
     $usuario= iniciarSession('Profesor', $conexion); // Obtenemos el rol del usuario
