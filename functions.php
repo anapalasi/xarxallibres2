@@ -114,4 +114,12 @@ function conexion($bd_config){
 		}
 		return $encontrado;
 	}
+
+	/* Funció que obte les dades que es mostren en recollida de lots */
+	function dadesRecollidaLots($conexion, $tutoria)
+	{
+		$sentencia = "select A.nombre, A. apellido1, A.apellido2, A.nia, L.repartit, L.folres, L.valoracioglobal, A.id_lote as lote from Alumno A, Lote L where A.id_lote = L.id_lote and A.banc_llibres!=0 and A.id_tutoria=\"" . $tutoria . "\" order by A.apellido1, A.apellido2, A.nombre";
+		$resultats =executaSentenciaTotsResultats($conexion, $sentencia);
+		return $resultats;
+	}
 ?>
