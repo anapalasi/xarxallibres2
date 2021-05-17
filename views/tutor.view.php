@@ -20,7 +20,7 @@
   </h2>
   <br>
 
-  <table border="1">
+  <table border="1" align="center" bgcolor="white">
   <tr>
     <th> Nom  </th>
     <th> Identificador del lot </th>
@@ -28,11 +28,15 @@
     <th> Folres </th>
     <th> Observacions </th>
   </tr>
+<form action="actualizaRecogida.php" method="post" width="100%"> 
+<?php
  
-  <?php
       foreach ($dades as $alumne){
-        echo "<tr><td>";
-        echo $alumne["nombre"]. " ". $alumne["apellido1"]. " ". $alumne["apellido2"];
+	echo "<tr><td>";
+	echo "<input type=\"hidden\" name=\"lote[]\" value=\"";
+        echo $alumne["lote"];
+	echo "\">";
+        echo utf8_encode($alumne["nombre"]). " ". utf8_encode($alumne["apellido1"]). " ". utf8_encode($alumne["apellido2"]);
         echo "</td>";
         echo "<td align=\"center\">";
       
@@ -42,26 +46,28 @@
           echo $alumne["lote"];
         echo "</td>";
         echo "<td align=\"center\">";
-        echo "<input type=\"checkbox\" name=\"recollit";
-        echo $llibre["nia"];
-        echo "\"";
-        if ($llibre["repartit"] == 1)
-          echo " checked>"; 
+        echo "<input type=\"checkbox\" name=\"recollit[]\"";
+        if ($alumne["repartit"] ==0 )
+		echo " checked";
+       	echo ">";	
         echo "</td>";
         echo "<td align=\"center\">";
-        echo "<input type=\"checkbox\" name=\"folres";
-        echo $llibre["nia"];
-        echo "\"";
-        if ($llibre["folres"] == 1)
-          echo " checked>"; 
+        echo "<input type=\"checkbox\" name=\"folres[]\"";
+        if ($alumne["folres"] == 1)
+		echo " checked";
+        echo ">";	
         echo "</td>";
-        echo "<td>";
-        echo $llibre["valoracioglobal"];
+	echo "<td>";
+	echo "<input type=\"text\" name=\"observacions[]\"";
+	echo utf8_encode($alumne["valoracioglobal"]);
+	echo "\">";
         echo "</td>";
         echo "</tr>";
   }
   ?>
 </table>
+ <p align="center"> <button type="reset" value="reset"> Valors inicials </button> <button type="submit" value="submit"> Guardar canvis </button></p>
+</form>
   <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>

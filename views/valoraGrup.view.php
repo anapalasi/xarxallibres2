@@ -82,7 +82,7 @@
 ?>
  </table>
  <br><br>
- <p align="center"> <button type="reset" value="reset"> Valores iniciales </button> <button type="submit" value="submit"> Guardar cambios </button></p> 
+ <p align="center"> <button type="reset" value="reset"> Valors inicials </button> <button type="submit" value="submit"> Guardar canvis </button></p> 
  </form>
   <a href="close.php">Cerrar Sesion</a>
 </body>
