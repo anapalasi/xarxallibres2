@@ -10,13 +10,31 @@
 
 	$conexion = conexion($bd_config);
 
+	// Array on es guardaran els lots que s'han tornat
+	$array_tornats=array();
+
+	// Array folres
+	$array_folres=array();
 
 	for($i=0;$i<count($_POST['lote']);$i++){
+
 		$tornat = $_POST['recollit'][$i];
-		$folres = $_POST['folres'][i];
+		if (strcmp($tornat,"") != "")
+			array_push($array_tornats,$tornat);
+
+		$folres = $_POST['folres'][$i];
+		if (strcmp($folres,"") != "")
+			array_push($array_folres,$folres);
+
 		$observacions = $_POST['observacions'][$i];
-		if (!is_null($_POST['lote'][$i]))
-			  echo "T " . $tornat . " F " . $folres. " O ". $observacions. "L " . $_POST['lote'][$i] . "<br>";
+
+		// Si les observacions son diferents de la cadena buida
+		if (strcmp($observacions,"") != 0){
+			// Actualitzarem les observacions
+			$sentencia="update Lote set valoracioglobal=\"". $observacions . "\" where id_lote=\"". $_POST['lote'][$i]."\"";
+			executaSentencia($conexion, $sentencia);
+		}
+		
 
 				
 	}

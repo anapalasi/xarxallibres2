@@ -46,20 +46,27 @@
           echo $alumne["lote"];
         echo "</td>";
         echo "<td align=\"center\">";
-        echo "<input type=\"checkbox\" name=\"recollit[]\"";
+        echo "<input type=\"checkbox\" name=\"recollit[]\" value=\"";
+        echo $alumne["lote"];
+        echo "\" ";
         if ($alumne["repartit"] ==0 )
 		echo " checked";
        	echo ">";	
         echo "</td>";
         echo "<td align=\"center\">";
-        echo "<input type=\"checkbox\" name=\"folres[]\"";
+        echo "<input type=\"checkbox\" name=\"folres[]\" value=\"";
+        echo $alumne["lote"];
+        echo "\" ";
         if ($alumne["folres"] == 1)
 		echo " checked";
         echo ">";	
         echo "</td>";
 	echo "<td>";
 	echo "<input type=\"text\" name=\"observacions[]\"";
-	echo utf8_encode($alumne["valoracioglobal"]);
+  if (strcmp($alumne["lote"],"NULL") == 0)
+       echo "readonly=\"readonly\"";
+  else
+	     echo utf8_encode($alumne["valoracioglobal"]);
 	echo "\">";
         echo "</td>";
         echo "</tr>";
