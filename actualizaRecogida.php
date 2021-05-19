@@ -16,8 +16,12 @@
 	// Array folres
 	$array_folres=array();
 
+	// Array que conté tots els lots
+	$array_lots= array();
+
 	for($i=0;$i<count($_POST['lote']);$i++){
 
+		array_push($array_lots, $_POST['lote'][$i]);
 		$tornat = $_POST['recollit'][$i];
 		if (strcmp($tornat,"") != "")
 			array_push($array_tornats,$tornat);
@@ -34,52 +38,24 @@
 			$sentencia="update Lote set valoracioglobal=\"". $observacions . "\" where id_lote=\"". $_POST['lote'][$i]."\"";
 			executaSentencia($conexion, $sentencia);
 		}
-		
-
-				
+						
 	}
-	/*	$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
-		array_push($exemplars,$_POST['ejemplar'][$i]);
-		$resultat = executaSentencia($conexion,$sql);
-		$indice=1;
-		// Si la observacio es diferent de NULL aleshores s'afig a l'array corresponent
-		if ($_POST['observacions'][$i])
-			array_push($observacions_formulari, $_POST['observacions'][$i]);
-	}
-    	/* Comprovem si les observacions guardades es mantenen i si no les esborrem */
-	/*foreach ($llistat_observacions as $guardada){
-		// Dividim amb el caracter separador. parts[0] seria l'exemplar i part[1] l'observacio
-		$parts = explode("-",$guardada); 
+	foreach ($array_lots as $lot){
+		if (strcmp($lot, "NULL") !=0 ){
+			if (estaEnArray($array_tornats, $lot))
+				$repartit=0; // Es guarda al reves a la base de dades
+			else
+				$repartit=1;
 
-		// Comprovem que l'observacio pertany a aquest curs
-		if (estaEnArray($exemplars,$parts[0]))
-		{
-			// Si ja no estan al formulari s'han d'esborrar
-			if (! in_array($guardada, $observacions_formulari)){
-				$sentencia = "DELETE FROM ObservacionEjemplar WHERE id_ejemplar=\"" . $parts[0]. "\" and id_observacion=\"". $parts[1]."\"";
-				executaSentencia($conexion, $sentencia);	
-			}
-		}
-			
-		
-	}
+			if (estaEnArray($array_folres, $lot))
+				$folres=1;
+			else
+				$folres=0;
 
-	/* Comprovem si les observacions del formulari estaven ja guardades i si no les inserirem */
-/*	foreach ($observacions_formulari as $nova_obs){
-		//Dividim amb el caracter separador
-		$parts = explode("-",$nova_obs);
-		
-		// Si no es troba en els llistats guardats hem d'inserir-la
-		if (! in_array($nova_obs, $llistat_observacions)){
-			$sentencia = "INSERT INTO ObservacionEjemplar (id_ejemplar, id_observacion) VALUES (\"". $parts[0]. "\",". $parts[1]. ")"; 
-			executaSentencia($conexion, $sentencia);	
+			$sentencia= "UPDATE Lote set repartit=". $repartit . ", folres=". $folres . " where id_lote=\"". $lot . "\"";
+			executaSentencia($conexion, $sentencia); 
 		}
 	}
-	 */
-//    $usuario= iniciarSession('Profesor', $conexion); // Obtenemos el rol del usuario
-	
-	
-	
-	
+
 	require 'views/actualizaRecogida.view.php';
 ?>
