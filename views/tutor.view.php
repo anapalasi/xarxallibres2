@@ -66,8 +66,12 @@
   if (strcmp($alumne["lote"],"NULL") == 0)
        echo "readonly=\"readonly\"";
   else
+  {
+       echo "value=\"";
 	     echo utf8_encode($alumne["valoracioglobal"]);
-	echo "\">";
+       echo "\"";
+  }
+	echo ">";
         echo "</td>";
         echo "</tr>";
   }
