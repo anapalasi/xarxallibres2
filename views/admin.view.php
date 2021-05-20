@@ -19,6 +19,7 @@
                 if ($tutor != "") 
                         echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
         ?>     
+        <li> Donar d'alta a un alumne </li>
 	</ul>
 
   <a href="close.php">Cerrar Sesion</a>
