@@ -16,7 +16,7 @@
   <?php
 	if (empty($grupos)){
 
-		echo "<br><p> No tienes grupos con libros </p><br><br>";
+		echo "<br><p> No tens grups amb llibres </p><br><br>";
 	}
 	else {
 

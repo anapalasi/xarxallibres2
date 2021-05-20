@@ -33,11 +33,11 @@
 		$observacions = $_POST['observacions'][$i];
 
 		// Si les observacions son diferents de la cadena buida
-		if (strcmp($observacions,"") != 0){
-			// Actualitzarem les observacions
-			$sentencia="update Lote set valoracioglobal=\"". $observacions . "\" where id_lote=\"". $_POST['lote'][$i]."\"";
-			executaSentencia($conexion, $sentencia);
-		}
+//		if (strcmp($observacions,"") != 0){
+		// Actualitzarem les observacions (pot ser la cadena buida quan volem esborrar-les
+		$sentencia="update Lote set valoracioglobal=\"". utf8_decode($observacions) . "\" where id_lote=\"". $_POST['lote'][$i]."\"";
+		executaSentencia($conexion, $sentencia);
+//		}
 						
 	}
 	foreach ($array_lots as $lot){
