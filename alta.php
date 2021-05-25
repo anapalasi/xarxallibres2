@@ -10,6 +10,20 @@
 
 	$conexion = conexion($bd_config);
 	
+	// Comprobamos si el lote estaba asignado a otro alumno y lo desasignamos
+	if (strcmp($_POST['asignado'],"otro") == 0){
+		if (strcmp($_POST['id_lote'],"") != 0){
+
+
+		$sentencia = "select * from Alumno where id_lote=\"" . $_POST['id_lote']. "\"";
+		$resultado = executaSentencia($conexion, $sentencia);
+
+		
+		$sentencia = "update Alumno set id_lote=\"NULL\" where nia=\"". $resultado["nia"]. "\"";
+		executaSentencia($conexion, $sentencia);
+
+		}
+	}
 	$sentencia="insert into Alumno (nia, nombre, apellido1, apellido2, banc_llibres, id_lote, id_tutoria) VALUES (\"";
 	$sentencia = $sentencia . $_POST['nia'];
 	$sentencia = $sentencia . "\", \"";

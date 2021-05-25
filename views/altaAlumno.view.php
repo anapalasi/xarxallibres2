@@ -64,6 +64,7 @@
 	</tr>
 
 	</table>
+	<label><input type="checkbox" name="asignado" value="otro"> El lot de llibres estava assignat a un altre alumne?</label>
  <br><br>
  <p align="center"> <button type="reset" value="reset"> Valors inicials </button> <button type="submit" value="submit"> Guardar canvis </button></p> 
  </form>
