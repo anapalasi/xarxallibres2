@@ -49,6 +49,16 @@
 	// Insertamos alumno en la base de datos
 	executaSentencia($conexion, $sentencia);
 
+	// Buscamos los grupos a los que pertenece la clase
+	$sentencia ="SELECT distinct id_grupo FROM `AlumnoGrupo` AG, Alumno A where A.nia=AG.nia and A.id_tutoria=\"". $_POST['tutoria']."\"";
+	$grupos=executaSentenciaTotsResultats($conexion, $sentencia);
+
+	// Insertamos el alumno nuevo en dichos grupos
+	foreach ($grupos as $grupo){
+		$sentencia="insert into AlumnoGrupo (nia, id_grupo) VALUES (\"". $_POST['nia']."\", \"". $grupo["id_grupo"]. "\")";
+		executaSentencia($conexion, $sentencia);	
+	}
+
 	echo $_POST["nombre"]. " ". $_POST["apellido1"]. " ha sigut donat d'alta <br>";
 
 	echo "<center> <a href=\"";
