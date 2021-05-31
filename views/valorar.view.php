@@ -27,7 +27,23 @@
 		echo "</ul>";
 
 	}	
-  ?>
+?>
+<br><br>
+<a href="<?php
+  if ($usuario['rol'] == 'administrador')
+  {
+    echo "admin.php";
+  }
+  else
+  {
+    echo "usuario.php";
+  }
+?>
+">
+
+<img src="img/casa.png" width="5%"></a></center>
+  <br>
+
   <a href="close.php">Cerrar Sesion</a>
 </body>
 </html>
