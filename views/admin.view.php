@@ -19,7 +19,8 @@
                 if ($tutor != "") 
                         echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
         ?>     
-        <li> <a href="altaAlumno.php"> Donar d'alta a un alumne </a></li>
+	<li> <a href="altaAlumno.php"> Donar d'alta a un alumne </a></li>
+        <li> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a></li>
 	</ul>
 
   <a href="close.php">Cerrar Sesion</a>
