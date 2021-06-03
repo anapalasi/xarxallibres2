@@ -12,7 +12,7 @@
 <body class="bg-image">
   <h1 align="center" class="texto">Informacio sobre un lot  </h1>
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-<h2> Introdueix les dades del lot </h2>
+<h2 class="texto"> Introdueix les dades del lot </h2>
 <p> Elegeix una de les dues formes per identificar el lot </p>
 <form action="valoraLot.php" method="post">
 
