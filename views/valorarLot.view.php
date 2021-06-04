@@ -10,21 +10,46 @@
   <title>Valoracio de llibres </title>
 </head>
 <body class="bg-image">
-  <h1 align="center" class="texto"> Valoracio de llibres </h1>
+  <h1 align="center" class="texto"> Valoracio dels llibres del lot 
+<?php  
+echo $_POST['id_lote'];
+?>
+</h1>
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-  <h2 class="texto"> Grups en els que s'imparteix classe </h2>
+  <h2 class="texto"> Llibres del lot </h2>
   <?php
-	if (empty($grupos)){
+	if (empty($llibres)){
 
-		echo "<br><p> No tens grups amb llibres </p><br><br>";
+		echo "<br><p> No hi ha llibres assignats a eixe lot </p><br><br>";
 	}
 	else {
+		// Mostrem els llibres del lot
+		echo "<form action=\"actualizaPuntuacion.php\" method=\"post\" width=\"100%\">";
+		echo "<table border=\"1\" align=\"center\" bgcolor=\"white\" width=\"100%\">";
+		echo " <tr><th> Identificador de l'exemplar </th> <th>Assignatura  </th><th> Volum </th><th>Estat  </th> <th> Observacions </th></tr>";
+		foreach ($llibres as $llibre){
+			echo "<tr>";
+			echo "<td>";
+			echo $llibre['id_ejemplar'];
+			echo "</td>";
+			echo "<td>";
+                        echo utf8_encode($llibre['nombre']);
+                        echo "</td>";
+			echo "<td align=\"center\">";
+                        echo $llibre['volumen'];
+                        echo "</td>";
+			echo "<td align=\"center\">";
+                        echo $llibre['puntos'];
+                        echo "</td>";
+			echo "<td>";
+			// Faltan las observaciones
+                        echo "</td>";
 
-		echo "<br><br><ul>";
-		foreach ($grupos as $grupo){
-			echo "<li> <a href=\"valoraGrup.php?grup=" . $grupo['id_grupo']. "\"> Valoraci&oacute; llibres: " . utf8_encode($grupo['descripcion']). "</a></li>";
+			echo "</tr>";
 		}
-		echo "</ul>";
+		echo " </table>";
+		echo "</form>";
+
 
 	}	
 ?>
