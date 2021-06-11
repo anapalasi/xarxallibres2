@@ -9,13 +9,15 @@
         }
 
 	$conexion = conexion($bd_config);
-	echo "Entra- " .$_POST['id_lote']. " - ". $_POST['nia'];
 	if (strcmp(trim($_POST['id_lote']),"") != 0){
-		echo "Ha introducido lote";
+		$llibres = mostraLlibresLot($conexion, $_POST['id_lote']);
+		echo "Ha introducido lote " . $_POST['id_lote'];
 	}
 	else {
-		if (strcmp(trim($_POST('nia')),"") !=0)
+		if (strcmp(trim($_POST['nia']),"") !=0){
+//			$llibres= mostraLlibresAlumne($conexion, $_POST['nia']);
 			echo "Ha introducido nia";
+		}
 	}
 	if ((strcmp(trim($_POST['id_lote']),"") == 0) && (strcmp(trim($_POST['nia']),"") == 0))
 		echo "No ha introducido datos para identificar el lote";

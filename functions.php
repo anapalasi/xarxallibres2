@@ -122,4 +122,19 @@ function conexion($bd_config){
 		$resultats =executaSentenciaTotsResultats($conexion, $sentencia);
 		return $resultats;
 	}
+
+	/* Funcio que mostra els llibres d'un lot */
+	function mostraLlibresLot($conexion, $id_lote)
+	{
+		$sentencia = "select distinct E.id_ejemplar as id_ejemplar, A.nombre as nombre, E.puntos as puntos, E.volumen_libro as volumen from Ejemplar E, Libro L, Asignatura A  where E.isbn_libro = L.isbn and L.id_asignatura = A.id_asignatura and id_lote=\"" . $id_lote . "\" order by E.id_ejemplar, E.volumen_libro";
+		$llibres = executaSentenciaTotsResultats($conexion, $sentencia);
+		return $llibres;
+	}
+
+	/* Funcio que mostra tots els llibres d'un alumne */
+/*	function mostraLlibresAlumne ($conexion, $nia){
+		$sentencia = "select E.id_ejemplar, E.puntos, E.fecha_mod, E.isbn_libro, E.volumen_libro, E.id_lote from Ejemplar E, Alumno A where E.id_lote = A.id_lote and A.nia =\"". $nia . "\"";
+		$llibres = executaSentenciaTotsResultats($conexion, $sentencia);
+                return $llibres;
+}*/
 ?>
