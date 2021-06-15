@@ -137,4 +137,9 @@ function conexion($bd_config){
 		$llibres = executaSentenciaTotsResultats($conexion, $sentencia);
                 return $llibres;
 }*/
+	function alumnesNoXarxaTutoria($conexion, $tutoria){
+		$sentencia = "select nombre as nom, apellido1 as ape1, apellido2 as ape2 from Alumno A, AlumnoGrupo AG where A.nia=AG.nia and A.banc_llibres=\"0\" and AG.id_grupo=\"". $tutoria."\"";
+		$noxarxa=executaSentenciaTotsResultats($conexion, $tutoria);
+		return $noxarxa;
+	}
 ?>

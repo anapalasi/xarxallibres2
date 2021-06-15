@@ -47,7 +47,11 @@
 		echo "<option value=\"0\"";
                 if ($llibre["puntos"] == "0")
                         echo "selected";
-                echo "> M </option>";
+		echo "> M </option>";
+		echo "<option value=\"-1\"";
+		if ($llibre["puntos"] == "-1")
+			echo "selected";
+		echo "> No lliurat </option>";
 
 
 		echo "</select>";
@@ -83,8 +87,17 @@
  </table>
  <br><br>
  <p align="center"> <button type="reset" value="reset"> Valors inicials </button> 
-<!-- <button type="submit" value="submit"> Guardar canvis </button> --> </p> 
+ <button type="submit" value="submit"> Guardar canvis </button>  </p> 
  </form>
+<?php
+	if (count($alumnesNoXarxa) != 0) {
+		echo "<br><h2 class=\"texto\"> Alumnes del grup que no son de xarxa </h2> <br>";
+		foreach ($alumnesNoXarxa as $alumne)
+		{
+			echo "<br>" . $alumne["nom"] . " " . $alumne["ape1"]. " " . $alumne["ape2"];
+		}
+	}
+?>
  <center> <a href="<?php
   if ($usuario['rol'] == 'administrador')
   {

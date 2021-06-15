@@ -78,7 +78,7 @@
   ?>
 </table>
  <p align="center"> <button type="reset" value="reset"> Valors inicials </button> 
-<!-- <button type="submit" value="submit"> Guardar canvis </button> --> </p>
+<button type="submit" value="submit"> Guardar canvis </button>  </p>
 </form>
 <center> <a href="<?php
   if ($usuario['rol'] == 'administrador')

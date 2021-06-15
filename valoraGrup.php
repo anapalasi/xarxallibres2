@@ -45,6 +45,7 @@
 		$observacionsExemplars[$exemplar] = $llista_incidencies;
 
 	}
+	$alumnesNoXarxa=alumnesNoXarxaTutoria($conexion, $id_grup);
 	require 'views/valoraGrup.view.php';
 
 ?>
