@@ -27,14 +27,18 @@
 	// Array amb els exemplars del curs. L'usarem despres per veure si les observacions son d'eixe curs
 	$exemplars=array();
 
+	//echo count($_POST['observacions']);
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		array_push($exemplars,$_POST['ejemplar'][$i]);
 		$resultat = executaSentencia($conexion,$sql);
-		$indice=1;
+		//	$indice=1;
+	}
+	for ($i=0;$i<count($_POST['observacions']);$i++){
 		// Si la observacio es diferent de NULL aleshores s'afig a l'array corresponent
-		if ($_POST['observacions'][$i])
+		if ($_POST['observacions'][$i]){
 			array_push($observacions_formulari, $_POST['observacions'][$i]);
+		}
 	}
     	/* Comprovem si les observacions guardades es mantenen i si no les esborrem */
 	foreach ($llistat_observacions as $guardada){
@@ -58,9 +62,10 @@
 	foreach ($observacions_formulari as $nova_obs){
 		//Dividim amb el caracter separador
 		$parts = explode("-",$nova_obs);
-		
+//	 	echo $nova_obs;	
 		// Si no es troba en els llistats guardats hem d'inserir-la
 		if (! in_array($nova_obs, $llistat_observacions)){
+//			echo $parts[0] . " " . $parts[1];
 			$sentencia = "INSERT INTO ObservacionEjemplar (id_ejemplar, id_observacion) VALUES (\"". $parts[0]. "\",". $parts[1]. ")"; 
 			executaSentencia($conexion, $sentencia);	
 		}

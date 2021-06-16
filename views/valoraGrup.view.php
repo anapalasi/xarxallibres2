@@ -20,7 +20,7 @@
 	
                 foreach ($alumnesNoXarxa as $alumne)
                 {
-                        echo "<br>" . $alumne["nom"] . " " . $alumne["ape1"]. " " . $alumne["ape2"];
+                        echo "<br>" . utf8_encode($alumne["nom"]) . " " . utf8_encode($alumne["ape1"]). " " . utf8_encode($alumne["ape2"]);
                 }
         }
 ?>
