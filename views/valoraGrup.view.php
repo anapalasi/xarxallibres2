@@ -14,6 +14,18 @@
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
   <h2 class="texto">Llistat d'alumnes de <?php echo utf8_encode($grup['descripcion']); ?> </h2>
   <br>
+  <?php
+          if (count($alumnesNoXarxa) != 0) {
+		  echo "<br><h3 class=\"texto\"> Alumnes del grup que no son de xarxa </h2> <br>";
+	
+                foreach ($alumnesNoXarxa as $alumne)
+                {
+                        echo "<br>" . $alumne["nom"] . " " . $alumne["ape1"]. " " . $alumne["ape2"];
+                }
+        }
+?>
+  <br><br>
+  <h3 class="texto"> Alumnes del grup que son de xarxa </h3>
   <form action="actualizaPuntuacion.php" method="post" width="100%">
   <table border="1" align="center" bgcolor="white" width="100%">
 
@@ -89,15 +101,6 @@
  <p align="center"> <button type="reset" value="reset"> Valors inicials </button> 
  <button type="submit" value="submit"> Guardar canvis </button>  </p> 
  </form>
-<?php
-	if (count($alumnesNoXarxa) != 0) {
-		echo "<br><h2 class=\"texto\"> Alumnes del grup que no son de xarxa </h2> <br>";
-		foreach ($alumnesNoXarxa as $alumne)
-		{
-			echo "<br>" . $alumne["nom"] . " " . $alumne["ape1"]. " " . $alumne["ape2"];
-		}
-	}
-?>
  <center> <a href="<?php
   if ($usuario['rol'] == 'administrador')
   {
