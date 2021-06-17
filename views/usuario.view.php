@@ -16,8 +16,10 @@
    <ul> 
 	<li> <a href="valorar.php"> Valorar llibres</a> </li><br>
 	<?php
-		if ($tutor != "") 
-			 echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li><br>";
+		if ($tutor != ""){ 
+			echo "<li><a href=\"valoraGrupTutor.php\"> Valorar llibres no valorats de la tutoria </a></li><br>";
+			echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li><br>";
+		}
 
 	?>
    </ul>
