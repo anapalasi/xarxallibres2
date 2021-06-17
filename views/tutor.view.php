@@ -20,6 +20,21 @@
   </h2>
   <br>
 
+<?php
+	if (count($alumnosNoValorados) !=0){
+		echo "<h3 class=\"texto\"> Alumnes que tenen llibres per valorar </h3>";
+		echo "<br>";
+		echo "Valoreu els llibres abans de emplenar la seguent secci&oacute; <br>";
+		echo "<ul>";
+		foreach ($alumnosNoValorados as $alumno){
+			echo "<li>". utf8_encode($alumno["nombre"]). " ". utf8_encode($alumno["apellido1"]). " ". utf8_encode($alumno["apellido2"]). "</li>";
+		}
+		echo "</ul>";
+	}
+?>
+  <br>
+  <h3 class="texto"> Dades dels lots tornats </h3>
+  <br>
   <table border="1" align="center" bgcolor="white">
   <tr>
     <th> Nom  </th>

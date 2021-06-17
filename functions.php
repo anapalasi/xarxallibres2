@@ -143,4 +143,11 @@ function conexion($bd_config){
 		$noxarxa=executaSentenciaTotsResultats($conexion, $sentencia);
 		return $noxarxa;
 	}
+
+	/* Funcion que devuelve el nombre de los alumnos que aun tienen libros para valorar en una tutoria */
+	function alumnosLibrosNoValorados($conexion, $tutoria){
+		$sentencia="SELECT distinct nombre, apellido1, apellido2 from Alumno A, Ejemplar E where A.id_lote=E.id_lote and E.puntos=-1 and id_tutoria=\"". $tutoria . "\"";
+		$alumnos=executaSentenciaTotsResultats($conexion, $sentencia);
+		return $alumnos;
+	}
 ?>

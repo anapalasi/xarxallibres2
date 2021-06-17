@@ -10,7 +10,7 @@
 
 	$conexion = conexion($bd_config);
 	$dades = dadesRecollidaLots($conexion, $_SESSION["id_tutoria"]);
-	
+	$alumnosNoValorados = alumnosLibrosNoValorados($conexion, $_SESSION["id_tutoria"]);	
 	require 'views/tutor.view.php';
 
 ?>
