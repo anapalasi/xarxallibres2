@@ -11,7 +11,7 @@
 	$conexion = conexion($bd_config);
 	$id_grup= $_GET["grup"];
 	$grup = dadesGrup($conexion,$id_grup);
-	$llibres=mostraLlibres($conexion, $id_grup);
+	$llibres=mostraLlibresNoValorats($conexion, $_SESSION["id_tutoria"]);
 	// Possibles valors d'observacions dels llibres
 	$sentencia = "select * from Observacion where id_observacion != 0";
 	$observacions = executaSentenciaTotsResultats($conexion, $sentencia);
@@ -46,6 +46,6 @@
 
 	}
 	$alumnesNoXarxa=alumnesNoXarxaTutoria($conexion, $id_grup);
-	require 'views/valoraGrup.view.php';
+	require 'views/valoraGrupTutor.view.php';
 
 ?>

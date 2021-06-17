@@ -57,6 +57,15 @@ function conexion($bd_config){
 		return $statement->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+
+	  /* Funcio que mostra els llibres no valorats d'un grup al tutor */
+        	function mostraLlibresNoValorats($conexion, $tutoria){
+                $sentencia="SELECT distinct A.nombre as nombre, A.apellido1 as apellido1, A.apellido2 as apellido2, L.titulo as titulo, E.id_ejemplar as ejemplar, E.volumen_libro as volumen, E.puntos as puntos FROM Alumno A, Ejemplar E, Libro L  WHERE E.id_lote = A.id_lote and E.isbn_libro = L.isbn and E.volumen_libro=L.volumen and E.puntos=-1 and A.id_tutoria= :tutoria order by A.apellido1, A.apellido2, A.nombre, E.volumen_libro";
+                $statement = $conexion->prepare($sentencia);
+                $statement->execute([ ':tutoria' => $tutoria]);
+                return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
 	/* Funcio que executa una sentencia  en la base de dades sense parametres */
 	function executaSentencia($conexion, $sentencia){
 		$statement = $conexion->prepare($sentencia);

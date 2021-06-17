@@ -10,26 +10,14 @@
   <title>Valoracio de llibres d'un grup </title>
 </head>
 <body class="bg-image">
-  <h1 align="center" class="texto"> Valoracio de llibres del grup  </h1>
+  <h1 align="center" class="texto"> Valoracio de llibres </h1>
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-  <h2 class="texto">Llistat d'alumnes de <?php echo utf8_encode($grup['descripcion']); ?> </h2>
+  <h2 class="texto">Llistat d'alumnes de la tutoria amb llibres per valorar </h2>
   <br>
-  <?php
-          if (count($alumnesNoXarxa) != 0) {
-		  echo "<br><h3 class=\"texto\"> Alumnes del grup que no son de xarxa </h2> <br>";
-	
-                foreach ($alumnesNoXarxa as $alumne)
-                {
-                        echo "<br>" . utf8_encode($alumne["nom"]) . " " . utf8_encode($alumne["ape1"]). " " . utf8_encode($alumne["ape2"]);
-                }
-        }
-?>
-  <br><br>
-  <h3 class="texto"> Alumnes del grup que son de xarxa </h3>
   <form action="actualizaPuntuacion.php" method="post" width="100%">
-  <table border="1" align="center" bgcolor="white" width="100%">
+  <table border="1" bgcolor="white" width="100%">
 
-  <tr><th> Nom </th> <th> Cognoms </th><th> Exemplar </th><th> Volum </th> <th> Estat </th> <th> Observacions </th></tr>
+  <tr><th> Nom </th> <th> Cognoms </th><th> T&iacute;tol</th><th> Exemplar </th><th> Volum </th> <th> Estat </th> <th> Observacions </th></tr>
 <?php
 	foreach ($llibres as $llibre){
 		
@@ -40,7 +28,9 @@
 		echo $llibre["ejemplar"];
 		echo "\">";
 	       	echo  utf8_encode($llibre["nombre"]) . "</td> <td>" . utf8_encode($llibre["apellido1"]);
-                echo  " " . utf8_encode($llibre["apellido2"]) ."</td><td>";
+		echo  " " . utf8_encode($llibre["apellido2"]) ."</td><td>";
+		echo utf8_encode($llibre["titulo"]);
+		echo "</td><td>";
                 echo  $llibre["ejemplar"] . "</td><td>";
 		echo  $llibre["volumen"] . "</td><td>";
 		echo "<select name=\"estat[]\">";
