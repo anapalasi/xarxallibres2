@@ -16,11 +16,15 @@
    <ul> 
         <li> <a href="valorar.php"> Valorar llibres</a> </li><br>
    	  <?php
-                if ($tutor != "") 
-                        echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
+			if ($tutor != ""){ 
+				echo "<li><a href=\"valoraGrupTutor.php\"> Valorar llibres no valorats de la tutoria </a></li><br>";
+				echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
+		}
         ?>     
 	<li> <a href="altaAlumno.php"> Donar d'alta a un alumne </a></li>
         <li> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a></li>
+	<li> <a href="reposarAlumnat.php"> Llistat de llibres a reposar per l'alumnat </a></li>
+	<li> <a href="reposarCentre.php"> Llistat de llibres a reposar pel centre </a></li>
 	</ul>
 
   <a href="close.php">Cerrar Sesion</a>
