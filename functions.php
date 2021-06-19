@@ -159,4 +159,17 @@ function conexion($bd_config){
 		$alumnos=executaSentenciaTotsResultats($conexion, $sentencia);
 		return $alumnos;
 	}
+	/* Funcio que torna els llibres a reposar per l'alumnat  */
+	function reposarAlumnat($conexion){
+		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=9 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria";
+		$reposar=executaSentenciaTotsResultats($conexion, $sentencia);
+		return $reposar;
+	}
+
+	/* Funcio que torna els llibres a reposar pel centre  */
+	function reposarCentre($conexion){
+		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=8 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria";
+		$reposar=executaSentenciaTotsResultats($conexion, $sentencia);
+		return $reposar;
+	}
 ?>
