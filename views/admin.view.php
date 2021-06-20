@@ -13,21 +13,26 @@
   <h1 align="center" class="texto">Hola <?php echo utf8_encode($user['nombre']) ." ". utf8_encode($user['apellido1']) ; ?></h1>
 <h2 class="texto"> Operacions que es poden realitzar </h2>
 <br><br>
-   <ul> 
-        <li> <a href="valorar.php"> Valorar llibres</a> </li><br>
+<h3 class="texto"> Gestió de recollida de llibres </h3>
+<br><br>
+    <a href="valorar.php"> Valorar llibres</a> <br>
    	  <?php
 			if ($tutor != ""){ 
-				echo "<li><a href=\"valoraGrupTutor.php\"> Valorar llibres no valorats de la tutoria </a></li><br>";
-				echo "<li><a href=\"tutor.php\">" .  $tutor. "</a></li>";
+				echo "<br><a href=\"valoraGrupTutor.php\"> Valorar llibres no valorats de la tutoria </a><br>";
+				echo "<br><a href=\"tutor.php\">" .  $tutor. "</a><br><br>";
 		}
         ?>     
-	<li> <a href="altaAlumno.php"> Donar d'alta a un alumne </a></li>
-        <li> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a></li>
-	<li> <a href="reposarAlumnat.php"> Llistat de llibres a reposar per l'alumnat </a></li>
-	<li> <a href="reposarCentre.php"> Llistat de llibres a reposar pel centre </a></li>
-	</ul>
+<br><h3 class="texto"> Gestió llibres a reposar </h3>
+  <br> <a href="reposarAlumnat.php"> Llistat de llibres a reposar per l'alumnat </a>
+  <br> <a href="reposarCentre.php"> Llistat de llibres a reposar pel centre </a> <br>
+<br> <h3 class="texto"> Gestió alta/baixa alumnat </h3>
+<br> <a href="altaAlumno.php"> Donar d'alta a un alumne </a><br>
+<br><h3 class="texto"> Altres operacions </h3>
+        <br> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a>
 
-  <a href="close.php">Cerrar Sesion</a>
+	
+
+  <br><br><a href="close.php">Cerrar Sesion</a>
 </body>
 </html>
 
