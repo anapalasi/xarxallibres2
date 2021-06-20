@@ -13,7 +13,9 @@
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
     <h1 align="center" class="texto">Llibres a reposar <?php echo $qui; ?> </h1>
     <br>
-  <center>
+ 
+  <form action="actualitzaReposat.php" method="post">
+
   <table border="1" bgcolor="white" align="center">
     <tr>
       <th> Alumne </th>
@@ -22,6 +24,7 @@
       <th> Volum </th>
       <th> Lot </th>
       <th> Tutoria </th>
+      <th> Reposat </th>
 
     </tr>
 <?php
@@ -56,12 +59,21 @@
         echo utf8_encode($llibre["id_tutoria"]);
         array_push($fila,$llibre["id_tutoria"]);
         echo "</td>";
+        echo "<td align=center>";
+        echo "<input type=\"checkbox\" name=\"reposat[]\" value=\"";
+        echo $llibre["id_ejemplar"];
+        echo "\">";
+        echo "</td>";
         echo "</tr>";
         $string_fila=implode(",", $fila);
         $valores= $valores . $string_fila. ";";
       }
     ?> 
   </table>
+  <br><br>
+
+    <button type="reset"> Valors inicials </button> <button type="submit"> Actualitza llibres reposats</button> 
+</form>
   <form action="pdf.php" method="post">
   <?php
     $titulo="Exemplars a reposar pel centre";
@@ -75,7 +87,6 @@
     
   <input type="submit" value="Generar PDF"></input> 
   </form>
-  </center>
 
 <br><br>
 <a href="<?php
