@@ -64,7 +64,7 @@
   </table>
   <form action="pdf.php" method="post">
   <?php
-    $titulo="Exemplars a reposar per l'alumnat";
+    $titulo="Exemplars a reposar pel centre";
     $valores =substr($valores, 0,-1);
     ?>
      <input type="hidden" name="titulo" value=" <?php echo $titulo; ?>">
