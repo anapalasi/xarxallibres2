@@ -27,6 +27,8 @@
   <br> <a href="reposarCentre.php"> Llistat de llibres a reposar pel centre </a> <br>
 <br> <h3 class="texto"> Gestió alta/baixa alumnat </h3>
 <br> <a href="altaAlumno.php"> Donar d'alta a un alumne </a><br>
+<br> <h3 class="texto"> Gestió assignació de llibres </h3>
+<br> <a href="puntacioGrup.php"> Puntuacions d'una tutoria </a><br>
 <br><h3 class="texto"> Altres operacions </h3>
         <br> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a>
 

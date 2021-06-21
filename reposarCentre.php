@@ -12,6 +12,6 @@
 
         $qui="pel centre";
         $reposar= reposarCentre($conexion);
-	require 'views/reposarAlumnat.view.php';
+	require 'views/reposarCentre.view.php';
 
 ?>

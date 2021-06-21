@@ -161,15 +161,22 @@ function conexion($bd_config){
 	}
 	/* Funcio que torna els llibres a reposar per l'alumnat  */
 	function reposarAlumnat($conexion){
-		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=9 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria";
+		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=9 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria, A.apellido1";
 		$reposar=executaSentenciaTotsResultats($conexion, $sentencia);
 		return $reposar;
 	}
 
 	/* Funcio que torna els llibres a reposar pel centre  */
 	function reposarCentre($conexion){
-		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=8 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria";
+		$sentencia="select distinct A.nombre, A.apellido1, A.apellido2, L.titulo, E.id_ejemplar, E.volumen_libro, A.id_tutoria, E.id_lote from Ejemplar E, ObservacionEjemplar O, Libro L, Alumno A where E.id_ejemplar = O.id_ejemplar and O.id_observacion=8 and E.isbn_libro=L.isbn and E.id_lote=A.id_lote order by A.id_tutoria, A.apellido1";
 		$reposar=executaSentenciaTotsResultats($conexion, $sentencia);
 		return $reposar;
+	}
+
+	/* Ordena els llibres d'una tutoria per puntuacio */
+	function ordenaLlibresTutoria($conexion, $tutoria){
+		$sentencia="SELECT E.id_lote, A.nombre, A.apellido1, A.apellido2, sum(E.puntos) as puntos FROM `Ejemplar` E, Alumno A where A.id_lote = E.id_lote and A.id_tutoria =\"". $tutoria . "\" group by E.id_lote, A.apellido1, A.apellido2, A.nombre order by puntos desc, A.apellido1,A.apellido2, A.nombre";
+		$resultat= executaSentenciaTotsResultats($conexion, $sentencia);
+		return $resultat;
 	}
 ?>
