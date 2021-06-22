@@ -37,11 +37,11 @@
         echo "<td>";
         $nombre = $llibre["nombre"]. " " . $llibre["apellido1"]. " " .$llibre["apellido2"];
         echo utf8_encode($nombre);
-        array_push($fila,$nombre);
+        array_push($fila,utf8_encode($nombre));
         echo "</td>";
         echo "<td>";
         echo utf8_encode($llibre["titulo"]);
-        array_push($fila,$llibre["titulo"]);
+        array_push($fila,utf8_encode($llibre["titulo"]));
         echo "</td>";
         echo "<td>";
         echo utf8_encode($llibre["id_ejemplar"]);
