@@ -179,4 +179,9 @@ function conexion($bd_config){
 		$resultat= executaSentenciaTotsResultats($conexion, $sentencia);
 		return $resultat;
 	}
+	function LotsPerTornar($conexion){
+		$sentencia="SELECT A.nombre, A.apellido1, A.apellido2, A.id_lote as lote, L.valoracioglobal, A.id_tutoria FROM `Lote` L, Alumno A WHERE repartit=1 and L.id_lote = A.id_lote and id_tutoria like '%ESO%' and A.id_lote !=\"NULL\" order by A.id_tutoria, A.apellido1, A.apellido2";
+		$resultat=executatSentenciaTotsResultats($conexion,$sentencia);
+		return $resultat;	
+	}
 ?>
