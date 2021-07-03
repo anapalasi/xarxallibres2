@@ -14,7 +14,7 @@
     <h1 align="center" class="texto">Valoracions lots de llibres </h1>
     <br>
  
-<!--  <form action="actualitzaValoracions.php" method="post">
+<form action="actualitzaValoracions.php" method="post">
 
   <table border="1" bgcolor="white" align="center">
     <tr>
@@ -26,10 +26,10 @@
 
     </tr>
   <?php
-  //    $cabecera=array('Alumne','Identificador','Observacions', 'Tutoria');
-    //  $anchura=array(80,30,80,25);
+      $cabecera=array('Alumne','Identificador','Observacions', 'Tutoria');
+      $anchura=array(80,30,80,25);
       $valores="";
-    /*foreach ($dades as $llibre){
+      foreach ($dades as $llibre){
         $fila = array();
         echo "<tr>";
         echo "<td>";
@@ -55,8 +55,8 @@
         $string_fila=implode(",", $fila);
         $valores= $valores . $string_fila. ";";
       }
-    ?>*/ 
-/*  </table>
+    ?> 
+  </table>
   <br><br>
 
  /*   <button type="reset"> Valors inicials </button> <button type="submit"> Actualitza valoracions</button> 
