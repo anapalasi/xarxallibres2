@@ -19,8 +19,20 @@
 	// Array que conté tots els lots
 	$array_lots= array();
 
+	// Array que conté els alumnes repetidors
+	$repetidors=array();
+
+	// Array que conté tots els nias
+	$nias=array();
+
+	for ($i=0;$i<count($_POST['nia']);$i++){
+		// Añadimos el nia del alumno
+		array_push($nias, $_POST['nia'][$i]);
+	}
+
 	for($i=0;$i<count($_POST['lote']);$i++){
 
+		
 		array_push($array_lots, $_POST['lote'][$i]);
 		$tornat = $_POST['recollit'][$i];
 		if (strcmp($tornat,"") != "")
@@ -30,8 +42,14 @@
 		if (strcmp($folres,"") != "")
 			array_push($array_folres,$folres);
 
+		$repetidor= $_POST['repetidor'][$i];
+
+		if (strcmp($repetidor,"") != "")
+			array_push($repetidors, $repetidor);
+
 		$observacions = $_POST['observacions'][$i];
 
+		
 		// Si les observacions son diferents de la cadena buida
 //		if (strcmp($observacions,"") != 0){
 		// Actualitzarem les observacions (pot ser la cadena buida quan volem esborrar-les
@@ -40,6 +58,19 @@
 //		}
 						
 	}
+
+
+	// Si aparece en $repetidors es porqué está marcado como repetidor
+	foreach ($nias as $nia){
+			if (estaEnArray($repetidors, $nia))
+			$repetidor=1;
+		else
+			$repetidor=0;
+
+		$sentencia="UPDATE Alumno set repetidor=\"". $repetidor. "\" where nia=\"". $nia . "\"";
+		executaSentencia($conexion, $sentencia);
+	}
+
 	foreach ($array_lots as $lot){
 		if (strcmp($lot, "NULL") !=0 ){
 			if (estaEnArray($array_tornats, $lot))

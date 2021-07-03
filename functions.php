@@ -127,7 +127,7 @@ function conexion($bd_config){
 	/* Funció que obte les dades que es mostren en recollida de lots */
 	function dadesRecollidaLots($conexion, $tutoria)
 	{
-		$sentencia = "select A.nombre, A. apellido1, A.apellido2, A.nia as nia, L.repartit, L.folres, L.valoracioglobal, A.id_lote as lote from Alumno A, Lote L where A.id_lote = L.id_lote and A.banc_llibres!=0 and A.id_tutoria=\"" . $tutoria . "\" order by A.apellido1, A.apellido2, A.nombre";
+		$sentencia = "select A.nombre, A. apellido1, A.apellido2, A.nia as nia, L.repartit, L.folres, L.valoracioglobal, A.id_lote as lote, A.repetidor as repetidor from Alumno A, Lote L where A.id_lote = L.id_lote and A.banc_llibres!=0 and A.id_tutoria=\"" . $tutoria . "\" order by A.apellido1, A.apellido2, A.nombre";
 		$resultats =executaSentenciaTotsResultats($conexion, $sentencia);
 		return $resultats;
 	}
@@ -181,8 +181,15 @@ function conexion($bd_config){
 	}
 	
 	function LotsPerTornar($conexion){
-		$sentencia="SELECT concat(A.nombre,' ', A.apellido1,' ', A.apellido2), A.id_lote as lote, A.id_tutoria FROM Lote L, Alumno A WHERE repartit=1 and L.id_lote = A.id_lote and id_tutoria like '%ESO%' and A.id_lote != \"NULL\" order by A.id_tutoria, A.apellido1, A.apellido2";
+		$sentencia="SELECT concat(A.nombre,' ', A.apellido1,' ', A.apellido2), A.id_lote as lote, A.id_tutoria FROM Lote L, Alumno A WHERE repartit=1 and L.id_lote = A.id_lote and id_tutoria like '%ESO%' and A.id_lote != \"NULL\" and A.repetidor != 1 order by A.id_tutoria, A.apellido1, A.apellido2";
 		$resultat=executaSentenciaTotsResultats($conexion,$sentencia);
 		return $resultat;
+	}
+
+	/* Obtenir les valoracions globals dels lots no buides */
+	function valoracioLots($conexion){
+		$sentencia="SELECT A.nombre, A.apellido1, A. apellido2, A.id_lote as lote, L.valoracioglobal, A.id_tutoria FROM Lote L, Alumno A where L.valoracioglobal !=\"\"  and A.id_lote = L.id_lote ORDER BY A.id_tutoria, A.apellido1, A.apellido2, A. nombre";
+		$resultat=executaSentenciaTotsResultats($conexion, $sentencia);
+		return $sentencia;
 	}
 ?>

@@ -41,6 +41,7 @@
     <th> Identificador del lot </th>
     <th> Tornat </th>
     <th> Folres </th>
+    <th> Repetidor </th>
     <th> Observacions </th>
   </tr>
 <form action="actualizaRecogida.php" method="post" width="100%"> 
@@ -51,6 +52,12 @@
 	echo "<input type=\"hidden\" name=\"lote[]\" value=\"";
         echo $alumne["lote"];
 	echo "\">";
+  
+  echo "<tr><td>";
+  echo "<input type=\"hidden\" name=\"nia[]\" value=\"";
+        echo $alumne["nia"];
+  echo "\">";
+
         echo utf8_encode($alumne["nombre"]). " ". utf8_encode($alumne["apellido1"]). " ". utf8_encode($alumne["apellido2"]);
         echo "</td>";
         echo "<td align=\"center\">";
@@ -76,6 +83,14 @@
 		echo " checked";
         echo ">";	
         echo "</td>";
+  echo "<td align=\"center\">";
+  echo "<input type=\"checkbox\" name=\"repetidor[]\" value=\"";
+  echo $alumne["nia"];
+  echo "\" ";
+  if ($alumne["repetidor"] == 1)
+      echo " checked";
+  echo ">";
+  echo "</td>";
 	echo "<td>";
 	echo "<input type=\"text\" name=\"observacions[]\"";
   if (strcmp($alumne["lote"],"NULL") == 0)
