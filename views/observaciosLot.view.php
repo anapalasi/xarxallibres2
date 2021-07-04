@@ -15,9 +15,7 @@
     <br>
   <!--  <form action="actualitzaValoracions.php" method="post">-->
 
-  <?php
-    echo count($dades);
-    ?>
+ 
   <table border="1" bgcolor="white" align="center">
     <tr>
       <th> Alumne </th>
