@@ -12,6 +12,6 @@
 
         $dades = valoracioLots($conexion);
         
-	require 'views/observacionsLot.view.php';
+	require 'views/observaciosLot.view.php';
 
 ?>

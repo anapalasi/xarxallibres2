@@ -2,7 +2,7 @@
 
 function conexion($bd_config){
 	try {
-		// Estructura PDO
+		// Estructura PDO0
 
 		$conexion = new PDO('mysql:host=localhost;dbname='. $bd_config['db_name'], $bd_config['user'], $bd_config['pass']);
 		return $conexion;
@@ -188,8 +188,14 @@ function conexion($bd_config){
 
 	/* Obtenir les valoracions globals dels lots no buides */
 	function valoracioLots($conexion){
-		$sentencia="SELECT A.nombre, A.apellido1, A. apellido2, A.id_lote as lote, L.valoracioglobal, A.id_tutoria FROM Lote L, Alumno A where L.valoracioglobal !=\"\"  and A.id_lote = L.id_lote ORDER BY A.id_tutoria, A.apellido1, A.apellido2, A. nombre";
+		$sentencia="SELECT A.nombre, A.apellido1, A. apellido2, A.id_lote as lote, L.valoracioglobal as valoracio, A.id_tutoria FROM Lote L, Alumno A where L.valoracioglobal !=\"\"  and A.id_lote = L.id_lote ORDER BY A.id_tutoria, A.apellido1, A.apellido2, A. nombre";
 		$resultat=executaSentenciaTotsResultats($conexion, $sentencia);
-		return $sentencia;
+		return $resultat;
 	}
-?>
+
+	/* Obtenir els alumnes repetidors */
+	function alumnesRepetidors($conexion){
+		$sentencia = "SELECT concat(nombre, ' ', apellido1,' ', apellido2), id_tutoria from Alumno where repetidor=\"1\" order by id_tutoria, apellido1, apellido2, nombre";
+		$resultat=executaSentenciaTotsResultats($conexion, $sentencia);
+		return $resultat;
+	}
