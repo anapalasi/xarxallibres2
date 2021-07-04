@@ -11,7 +11,7 @@
 </head>
 <body class="bg-image">
   <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-    <h1 align="center" class="texto">Valoracions lots de llibres </h1>
+    <h1 align="center" class="texto">Observacions lots de llibres </h1>
     <br>
   <!--  <form action="actualitzaValoracions.php" method="post">-->
 
