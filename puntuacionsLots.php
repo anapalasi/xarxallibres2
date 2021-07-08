@@ -56,12 +56,12 @@
 	   		 }
 	    	$pdf->Ln();
 	  	}
+	  	$pdf->Ln();
+  		$pdf->Ln();
+  		$fecha=date('d/m/y');
+  		$frase = "Informe generat el " . $fecha;
+  		$pdf->Cell(0,10,utf8_encode($frase),0,0,"R");
 	}
-	$pdf->Ln();
-  	$pdf->Ln();
-  	$fecha=date('d/m/y');
-  	$frase = "Informe generat el " . $fecha;
-  	$pdf->Cell(0,10,utf8_encode($frase),0,0,"R");
 	
 
 	$pdf->Output();
