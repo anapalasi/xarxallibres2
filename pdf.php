@@ -1,11 +1,12 @@
 <?php
-require('fpdf/fpdf.php');
+require('fpdf/pdf.php');
 
-$pdf=new FPDF("L");
+$pdf=new PDF("L");
+$pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',16);
 // Imprimimos el título
-$pdf->Cell(0,10,utf8_decode($_POST["titulo"]),"C");
+$pdf->Cell(0,10,utf8_decode($_POST["titulo"]),0,0,"C");
 $pdf->Ln();
 $pdf->Ln();
 

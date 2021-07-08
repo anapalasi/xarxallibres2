@@ -2,7 +2,7 @@
 
         require 'admin/config.php';
         require 'functions.php';
-       	require 'fpdf/fpdf.php';
+       	require 'fpdf/pdf.php';
 
 
         // comprobar session
@@ -14,13 +14,15 @@
 
         $dades = alumnesRepetidors($conexion);
         
-        $cabecera=array('Alumne','Tutoria');
-		$anchura=array(110,40);
+        $cabecera=array('Alumne','Tutoria','Lote');
+		$anchura=array(110,30,40);
 	
-	$pdf = new FPDF();
+	$pdf = new PDF();
+  $pdf->AliasNbPages();
+
 	$pdf->AddPage();
 	$pdf->SetFont('Arial','B',16);
-	$pdf->Cell(0,10,'Alumnat repetidor',"C");
+	$pdf->Cell(0,10,'Alumnat repetidor',0,0,"C");
 	$pdf->Ln();
 	$pdf->Ln();
 	$pdf->SetFont('Arial','B',10);
@@ -42,7 +44,11 @@
    		 }
     	$pdf->Ln();
   	}
-
+  	$pdf->Ln();
+  	$pdf->Ln();
+  	$fecha=date('d/m/y');
+  	$frase = "Informe generat el " . $fecha;
+  	$pdf->Cell(150,10,utf8_encode($frase),0,0,"R");
 	
 
 	$pdf->Output();

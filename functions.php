@@ -195,7 +195,7 @@ function conexion($bd_config){
 
 	/* Obtenir els alumnes repetidors */
 	function alumnesRepetidors($conexion){
-		$sentencia = "SELECT concat(nombre, ' ', apellido1,' ', apellido2), id_tutoria from Alumno where repetidor=\"1\" order by id_tutoria, apellido1, apellido2, nombre";
+		$sentencia = "SELECT concat(nombre, ' ', apellido1,' ', apellido2), id_tutoria,id_lote from Alumno where repetidor=\"1\" order by id_tutoria, apellido1, apellido2, nombre";
 		$resultat=executaSentenciaTotsResultats($conexion, $sentencia);
 		return $resultat;
 	}
