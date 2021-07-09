@@ -15,8 +15,8 @@
 
 	$grupos = tutoriasConLibros($conexion);
 
-	$cabecera=array('Alumne','Lot','Punts','Repartit','Folre','ValoracioGlobal');
-	$anchura=array(80,20,20,20,20,100);
+	$cabecera=array('Alumne','Lot','Punts','Repeteix','Repartit','Folre','ValoracioGlobal');
+	$anchura=array(80,20,15,20,15,15,100);
 	
 	$filas=LotsPerTornar($conexion);
 
