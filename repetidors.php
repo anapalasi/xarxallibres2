@@ -39,7 +39,7 @@
   	// Obtenemos los valores separándolos por comas
   		$i=0;
   		foreach ($valor as $dato){
-  			$pdf->Cell($anchura[$i],10,utf8_decode($dato),1,0,"C");
+  			$pdf->Cell($anchura[$i],10,$dato,1,0,"C");
     		$i++;
    		 }
     	$pdf->Ln();
