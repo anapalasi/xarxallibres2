@@ -111,6 +111,13 @@ function conexion($bd_config){
 		return $array_observacions;
 	}
 
+	function obteTipusObservacions($conexion)
+	{
+		$sentencia = "select * from Observacion";
+		$resultat = executaSentenciaTotsResultats($conexion,$sentencia);
+		return $resultat;
+	}
+
 	/*Funcio que indica si una cadena es troba en un array */
 	function estaEnArray($lista, $cadena){
 		$encontrado = False;
@@ -136,6 +143,13 @@ function conexion($bd_config){
 	function mostraLlibresLot($conexion, $id_lote)
 	{
 		$sentencia = "select distinct E.id_ejemplar as id_ejemplar, A.nombre as nombre, E.puntos as puntos, E.volumen_libro as volumen from Ejemplar E, Libro L, Asignatura A  where E.isbn_libro = L.isbn and L.id_asignatura = A.id_asignatura and id_lote=\"" . $id_lote . "\" order by E.id_ejemplar, E.volumen_libro";
+		$llibres = executaSentenciaTotsResultats($conexion, $sentencia);
+		return $llibres;
+	}
+	/* Funcio que mostra els llibres d'un lot */
+	function mostraLlibresAlumne($conexion, $nia)
+	{
+		$sentencia = "select distinct E.id_ejemplar as id_ejemplar, Asig.nombre as nombre, concat(A.nombre, ' ', A.apellido1, ' ', A.apellido2) as nombre_completo, E.puntos as puntos, E.volumen_libro as volumen from Ejemplar E, Libro L, Asignatura Asig, Alumno A  where E.isbn_libro = L.isbn and L.id_asignatura = Asig.id_asignatura and A.id_lote=E.id_lote and A.nia=\"". $nia. "\" order by E.id_ejemplar, E.volumen_libro";
 		$llibres = executaSentenciaTotsResultats($conexion, $sentencia);
 		return $llibres;
 	}
@@ -211,5 +225,26 @@ function conexion($bd_config){
 	function tutoriasConLibros($conexion){
 		$sentencia = "select id_tutoria, descripcion from Tutoria where id_tutoria like '20%ESO%'or id_tutoria like '20%CFB%'";
 		$resultat = executaSentenciaTotsResultats($conexion, $sentencia);
+		return $resultat;
+	}
+
+	/* Funció que torna els lots que ja han tornat i no tenen folres */
+	function senseFolres($conexion){
+		$sentencia="select concat(A.nombre,' ', A.apellido1,' ', A.apellido2), L.id_lote, A.id_tutoria from Alumno A, Lote L where A.id_lote= L.id_lote and L.repartit=\"0\" and L.folres=\"0\" order by A.id_tutoria, A.apellido1, A.apellido2, A.nombre";
+		$resultat = executaSentenciaTotsResultats($conexion, $sentencia);
+		return $resultat;
+	}
+
+	/* Funció que torna el nom complet d'un nia */
+	function nomCompletNIA($conexion,$nia){
+		$sentencia = "select concat(nombre,' ', apellido1,' ', apellido2) as nombre, id_lote as lote from Alumno where nia=\"" . $nia ."\"";
+		$resultat=executaSentencia($conexion,$sentencia);
+		return $resultat;
+	}
+
+	/* Funció que torna el nom complet de l'alumne al que pertany un lot */
+	function nomCompletLot($conexion,$lot){
+		$sentencia = "select concat(nombre,' ', apellido1,' ', apellido2) as nombre, id_lote as lote from Alumno where id_lote=\"" . $lot ."\"";
+		$resultat=executaSentencia($conexion,$sentencia);
 		return $resultat;
 	}

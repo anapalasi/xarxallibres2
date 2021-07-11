@@ -27,6 +27,7 @@
   <br> <a href="reposarCentre.php"> Llistat de llibres a reposar pel centre </a> 
   <br> <a href="lotsSenseTornar.php"> Llistat de lots sense tornar </a>
   <br> <a href="observacionsLot.php"> Llistat d'observacions del lot</a></br>
+  <br> <a href="senseFolres.php"> Llistat de lots tornats sense folres </a></br>
 <br> <h3 class="texto"> Gestió alta/baixa alumnat </h3>
 <br> <a href="repetidors.php"> Alumnes repetidors </a>
 <br> <a href="altaAlumno.php"> Donar d'alta a un alumne </a><br>

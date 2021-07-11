@@ -10,14 +10,23 @@
   <title>Valoracio de llibres </title>
 </head>
 <body class="bg-image">
-  <h1 align="center" class="texto"> Valoracio dels llibres del lot 
+
 <?php  
-echo $_POST['id_lote'];
+    echo   "<h1 align=\"center\" class=\"texto\"> Valoracio dels llibres de l'alumne/a ";
+    echo $nombreCompleto["nombre"];
+    echo "</h1>";
+ 
+  echo "<p align=\"center\"> <img src=\"img/xarxa_llibres-300x150.png\" alt=\"Logo Xarxa Llibres\"></p><br>";
 ?>
-</h1>
-  <p align="center"> <img src="img/xarxa_llibres-300x150.png" alt="Logo Xarxa Llibres"></p><br>
-  <h2 class="texto"> Llibres del lot </h2>
+
+  
+  <h2 class="texto"> Llibres del lot 
   <?php
+  if (!empty($_POST['nia']))
+    echo $nombreCompleto["lote"];
+  else 
+    echo $_POST['id_lote'];
+  echo "</h2><br>";
 	if (empty($llibres)){
 
 		echo "<br><p> No hi ha llibres assignats a eixe lot </p><br><br>";
@@ -30,7 +39,11 @@ echo $_POST['id_lote'];
 		foreach ($llibres as $llibre){
 			echo "<tr>";
 			echo "<td>";
-			echo $llibre['id_ejemplar'];
+      $exemplar=$llibre['id_ejemplar'];
+      echo "<input type=\"hidden\" name=\"ejemplar[]\" value=\"";
+        echo $exemplar;
+        echo "\">";
+			echo $exemplar;
 			echo "</td>";
 			echo "<td>";
                         echo utf8_encode($llibre['nombre']);
@@ -39,11 +52,52 @@ echo $_POST['id_lote'];
                         echo $llibre['volumen'];
                         echo "</td>";
 			echo "<td align=\"center\">";
-                        echo $llibre['puntos'];
-                        echo "</td>";
+      echo "<select name=\"estat[]\">";
+        echo "<option value=\"3\" ";
+          if ($llibre["puntos"] == "3")
+            echo "selected";
+        echo "> MB </option>";
+        echo "<option value=\"2\" ";
+                    if ($llibre["puntos"] == "2")
+                            echo "selected";
+                    echo "> B </option>";
+        echo "<option value=\"1\" ";
+                    if ($llibre["puntos"] == "1")
+                            echo "selected";
+                    echo "> R </option>";
+        echo "<option value=\"0\"";
+                    if ($llibre["puntos"] == "0")
+                            echo "selected";
+        echo "> M </option>";
+        echo "<option value=\"-1\"";
+        if ($llibre["puntos"] == "-1")
+          echo "selected";
+        echo "> No lliurat </option>";
+
+     echo "</select>";
+                       echo "</td>";
 			echo "<td>";
-			// Faltan las observaciones
-                        echo "</td>";
+			// Identificadors de les observacions
+      $llista = observacionsExemplar($conexion, $exemplar);
+      $llista_observacions=array();
+      foreach ($llista as $elemento){
+        array_push($llista_observacions, $elemento["id_observacion"]);
+      }
+
+      $totesObservacions=obteTipusObservacions($conexion);
+      foreach ($totesObservacions as $observacio){
+        echo "<input type=\"checkbox\" name=\"observacions";
+        //  echo  $observacio["id_observacion"];
+        echo "[]\" value=\"";
+        echo $exemplar. "-" .$observacio["id_observacion"];
+        echo "\"";
+        if (estaEnArray($llista_observacions,$observacio["id_observacion"]))
+            echo " checked";
+        echo ">";
+        echo utf8_encode($observacio["descripcion"]);
+        echo "<br>";  
+      }
+      echo "</td>";
 
 			echo "</tr>";
 		}

@@ -22,7 +22,7 @@
 <p> NIA de l'alumne/a que te el lot assignat <input type="text" name="nia">  </p>		
 <br><br>
  <p align="center"> <button type="reset" value="reset"> Valors inicials </button> 
- <button type="submit" value="submit"> Guardar canvis </button> </p> 
+ <button type="submit" value="submit"> Consultar dades </button> </p> 
 
 </form>
 <br><br>

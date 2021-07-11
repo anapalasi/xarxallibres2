@@ -89,7 +89,7 @@
 			// Comprovaremos si esta seleccionat a la base de dades
 			echo ">";
 			echo utf8_encode($observacio["descripcion"]);
-			echo "<br>";	
+			echo "<br>";
 		}
 		echo   "</td></tr>";
 	

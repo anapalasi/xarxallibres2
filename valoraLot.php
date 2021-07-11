@@ -11,12 +11,14 @@
 	$conexion = conexion($bd_config);
 	if (strcmp(trim($_POST['id_lote']),"") != 0){
 		$llibres = mostraLlibresLot($conexion, $_POST['id_lote']);
-		echo "Ha introducido lote " . $_POST['id_lote'];
+		$nombreCompleto=nomCompletLot($conexion, $_POST['id_lote']);
+
 	}
 	else {
 		if (strcmp(trim($_POST['nia']),"") !=0){
 //			$llibres= mostraLlibresAlumne($conexion, $_POST['nia']);
-			echo "Ha introducido nia";
+			$llibres = mostraLlibresAlumne($conexion,$_POST['nia']);
+			$nombreCompleto = nomCompletNIA($conexion, $_POST["nia"]);
 		}
 	}
 	if ((strcmp(trim($_POST['id_lote']),"") == 0) && (strcmp(trim($_POST['nia']),"") == 0))
