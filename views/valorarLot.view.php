@@ -38,8 +38,8 @@
 	else {
     echo "<br> Puntuació del lot de llibres " . $puntuacio. " <br>";
     // Mostrem els llibres del lot
-    echo "<form action=\"actualizaPuntuacion.php\" method=\"post\" width=\"100%\">";
-    echo "<input type=\"hidden\" value=\"". $lote ."\">";
+    echo "<form action=\"actualizaLot.php\" method=\"post\" width=\"100%\">";
+    echo "<input type=\"hidden\" name=\"lote\" value=\"". $lote ."\">";
     echo "<h3 class=\"texto\"> Dades del lot </h3><br>";
     echo "<table border=\"0\"><tr><td width=\"200\">";
     echo "Repartit <input type=\"checkbox\" name=\"repartit\" ";
