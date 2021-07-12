@@ -36,7 +36,7 @@
 		echo "<br><p> No hi ha llibres assignats a eixe lot </p><br><br>";
 	}
 	else {
-    echo "<br> Puntuació del lot de llibres " . $puntuacio. " <br>";
+    echo "<br> <strong> Puntuació del lot de llibres " . $puntuacio. " </strong><br>";
     // Mostrem els llibres del lot
     echo "<form action=\"actualizaLot.php\" method=\"post\" width=\"100%\">";
     echo "<input type=\"hidden\" name=\"lote\" value=\"". $lote ."\">";

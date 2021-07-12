@@ -39,21 +39,24 @@
 		$folres=0;
 	$sql="update Lote set repartit=\"". $repartit."\", folres=\"". $folres . "\", valoracioglobal=\"". $_POST["valoracioglobal"]."\" where id_lote=\"". $_POST["lote"]."\"";
 	$resultat=executaSentencia($conexion, $sql);
-	//echo count($_POST['observacions']);
-/*	for($i=0;$i<count($_POST['ejemplar']);$i++){
+
+	//Actualitzem l'estat de tots els exemplars.
+	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
 		array_push($exemplars,$_POST['ejemplar'][$i]);
 		$resultat = executaSentencia($conexion,$sql);
 		//	$indice=1;
 	}
+	
 	for ($i=0;$i<count($_POST['observacions']);$i++){
 		// Si la observacio es diferent de NULL aleshores s'afig a l'array corresponent
 		if ($_POST['observacions'][$i]){
 			array_push($observacions_formulari, $_POST['observacions'][$i]);
 		}
 	}
-    	/* Comprovem si les observacions guardades es mantenen i si no les esborrem */
-/*	foreach ($llistat_observacions as $guardada){
+
+    /* Comprovem si les observacions guardades es mantenen i si no les esborrem */
+	foreach ($llistat_observacions as $guardada){
 		// Dividim amb el caracter separador. parts[0] seria l'exemplar i part[1] l'observacio
 		$parts = explode("-",$guardada); 
 
@@ -71,7 +74,7 @@
 	}
 
 	/* Comprovem si les observacions del formulari estaven ja guardades i si no les inserirem */
-/*	foreach ($observacions_formulari as $nova_obs){
+	foreach ($observacions_formulari as $nova_obs){
 		//Dividim amb el caracter separador
 		$parts = explode("-",$nova_obs);
 //	 	echo $nova_obs;	
@@ -82,7 +85,7 @@
 			executaSentencia($conexion, $sentencia);	
 		}
 	}
-	*/
+	
 
     $usuario= iniciarSession('Profesor', $conexion); // Obtenemos el rol del usuario
 	
