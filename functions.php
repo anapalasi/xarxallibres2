@@ -248,3 +248,17 @@ function conexion($bd_config){
 		$resultat=executaSentencia($conexion,$sentencia);
 		return $resultat;
 	}
+
+	/* Funció que calcula la puntuació d'un lot */
+	function calculaPuntuacio($conexion, $id_lote){
+		$sentencia="select sum(puntos) as puntos from Ejemplar where id_lote=\"". $id_lote . "\" group by id_lote";
+		$resultat=executaSentencia($conexion, $sentencia);
+		return $resultat["puntos"];
+	}
+
+	/* Funció que obte les dades d'un lot */
+	function dadesLot($conexion, $id_lote){
+		$sentencia="select repartit, folres, valoracioglobal from Lote where id_lote=\"" . $id_lote . "\"";
+		$resultat=executaSentencia($conexion, $sentencia);
+		return $resultat;
+	}

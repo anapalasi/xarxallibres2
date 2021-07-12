@@ -22,18 +22,49 @@
   
   <h2 class="texto"> Llibres del lot 
   <?php
-  if (!empty($_POST['nia']))
-    echo $nombreCompleto["lote"];
-  else 
-    echo $_POST['id_lote'];
+  if (!empty($_POST['nia'])){
+    $lote=$nombreCompleto["lote"];
+    echo $lote;
+  }
+  else {
+    $lote=$_POST['id_lote'];
+    echo $lote;
+  }
   echo "</h2><br>";
 	if (empty($llibres)){
 
 		echo "<br><p> No hi ha llibres assignats a eixe lot </p><br><br>";
 	}
 	else {
-		// Mostrem els llibres del lot
-		echo "<form action=\"actualizaPuntuacion.php\" method=\"post\" width=\"100%\">";
+    echo "<br> Puntuació del lot de llibres " . $puntuacio. " <br>";
+    // Mostrem els llibres del lot
+    echo "<form action=\"actualizaPuntuacion.php\" method=\"post\" width=\"100%\">";
+    echo "<input type=\"hidden\" value=\"". $lote ."\">";
+    echo "<h3 class=\"texto\"> Dades del lot </h3><br>";
+    echo "<table border=\"0\"><tr><td width=\"200\">";
+    echo "Repartit <input type=\"checkbox\" name=\"repartit\" ";
+    $repartit=$dadesLot["repartit"];
+    if ($repartit == "1"){
+        echo "checked ";
+    }
+    echo ">";
+    echo "</td>";
+    echo "<td width=\"200\">";
+     echo "Folres <input type=\"checkbox\" name=\"folres\" ";
+    $folres=$dadesLot["folres"];
+    if ($folres == "1"){
+        echo "checked ";
+    }
+    echo ">";
+  
+    echo "</td>";
+    echo "<tr><td colspan=\"2\">";
+    echo "<input type=\"text\" name=\"valoracioglobal\" value=\"". $dadesLot["valoracioglobal"]. "\" size=\"60\">";
+    echo "</td>";
+    echo "</table>";
+    echo "<br><br>";
+
+	  echo "<h3 class=\"texto\"> Dades dels llibres </h3><br>";
 		echo "<table border=\"1\" align=\"center\" bgcolor=\"white\" width=\"100%\">";
 		echo " <tr><th> Identificador de l'exemplar </th> <th>Assignatura  </th><th> Volum </th><th>Estat  </th> <th> Observacions </th></tr>";
 		foreach ($llibres as $llibre){
@@ -102,6 +133,9 @@
 			echo "</tr>";
 		}
 		echo " </table>";
+    echo "<br><br>";
+   echo "<p align=\"center\"> <button type=\"reset\" value=\"reset\"> Valors inicials </button> ";
+   echo "<button type=\"submit\" value=\"submit\"> Guardar canvis </button>  </p> ";
 		echo "</form>";
 
 
