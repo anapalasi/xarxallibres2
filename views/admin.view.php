@@ -36,6 +36,7 @@
 <br><h3 class="texto"> Altres operacions </h3>
         <br> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a>
         <br> <a href="puntuacionsLots.php"> Consultar puntuacions lots </a>
+        <br><a href="dadesLotAlumne.php"> Consultar alumnes i dades de lots assignats </a>
 
 	
 
