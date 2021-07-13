@@ -57,35 +57,93 @@
            	$pdf->SetFont('Arial','B',12);
         	$pdf->Cell(0,10,"Dades dels llibres");
         	$pdf->Ln();
-        	$pdf->SetFont('Arial','B',10);
-        	$cabecera=array('Títol','Id_Ejemplar','Volum','Estat','Observacions');
-   			$anchura=array(70,25,20,20,60);
-   			 // Imprimimos la cabecera
-   			$i=0;
+        	$pdf->SetFont('Arial','',10);
+        	$cabecera=array('Id_Ejemplar','Titol','Estat','Volum','Observacions');
+   		$anchura=array(40,65,15,15,55);
+   		 // Imprimimos la cabecera
+   		$i=0;
 	        foreach($cabecera as $col){
 	                $pdf->Cell($anchura[$i],7,utf8_decode($col),1,0,"C"); 
 	                $i++;
 	        }
-	        $pdf->Ln();
-      		$llibres=mostraLlibresAlumne($conexion,$alumne["nia"]);
-      		$pdf->Cell(0,10,count($llibres));
+		$pdf->Ln();
+		// Obtenim els llibres de cadascun dels lots
+		$llibres=mostraLlibresLot($conexion,$alumne["id_lote"]);
+
+		// Arrays per saber els llibres a reposar per l'alumnat i pel centre
+		$reposarAlumnat=array();
+		$reposarCentre=array();
+
+		foreach ($llibres as $llibre)
+		{
+			$i=0;
+
+
+			
+			$observacions=observacionsExemplar($conexion, $llibre["id_ejemplar"]);
+			$altura=7;
+			if (count($observacions)>=2){
+				$altura=count($observacions)*$altura;
+			}
+
+			foreach ($llibre as $dato){
+				$pdf->Cell($anchura[$i],$altura,$dato,1,0,"C");
+				$i++;
+			}
+
+			// Si l'exemplar te observacions busquem la seua descripcio
+			if (count($observacions) !=0){
+				$text="";
+				foreach ($observacions as $observacio){
+					$descripcio=descripcioObservacio($conexion,$observacio["id_observacion"]);
+					$text = $text . $descripcio. "\n";
+					if (strcmp($observacio["id_observacion"],"8")==0){
+						array_push($reposarCentre,$llibre["id_ejemplar"]);
+					}
+					else{
+
+						if (strcmp($observacio["id_observacion"],"9")==0){
+							array_push($reposarAlumnat,$llibre["id_ejemplar"]);
+						}
+					}
+				}
+				$text=substr($text,0,-1);
+				$pdf->MultiCell($anchura[$i],7,$text,1,"C",false);
+			}	
+			else {
+				$pdf->Cell($anchura[$i],7,"",1,0,"C");
+				$pdf->Ln();
+			}
+		}
+
+		if (count($reposarCentre) !=0){
+			$pdf->Ln();
+			$pdf->SetFont('Arial','B',12);
+			$pdf->Cell(0,10,"Llibres a reposar pel Centre");
+			$pdf->Ln();
+			$pdf->SetFont('Arial','',10);
+
+			foreach ($reposarCentre as $reposar){
+				$pdf->Cell(0,10,$reposar);
+				$pdf->Ln();
+			}
+		}	
+         	if (count($reposarAlumnat) !=0){
+                        $pdf->Ln();
+                        $pdf->SetFont('Arial','B',12);
+                        $pdf->Cell(0,10,"Llibres a reposar per l'alumnat");
+                        $pdf->Ln();
+                        $pdf->SetFont('Arial','',10);
+
+                        foreach ($reposarAlumnat as $reposar){
+                                $pdf->Cell(0,10,$reposar);
+                                $pdf->Ln();
+                        }
+                }
+
 
     	}
         
-
-/*       
-        $files= senseFolres($conexion);
-        foreach ($files as $valor){
-                $i=0;
-
-                foreach ($valor as $dato){
-                       // Obtenemos los valores separándolos por comas
-                        $pdf->Cell($anchura[$i],10,utf8_decode($dato),1,0,"C");
-                        $i++;
-                }
-                $pdf->Ln();
-        }
-       */ 
     }
         $pdf->Ln();
         $fecha=date('d/m/y');

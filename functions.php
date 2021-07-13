@@ -215,7 +215,7 @@ function conexion($bd_config){
 	}
 	/* Funcio que calcula les puntuacions dels lots */
 	function puntuacioLotsTutoria($conexion,$tutoria){
-		$sentencia = "select concat(A.nombre, ' ', A.apellido1,' ', A.apellido2) as nombre, E.id_lote, sum(E.puntos) as puntos, A.repetidor, L.repartit, L.folres, L.valoracioglobal, A.nia as nia from Ejemplar E, Alumno A, Lote L where E.id_lote = A.id_lote and L.id_lote=E.id_lote and A.id_tutoria=\"";
+		$sentencia = "select concat(A.nombre, ' ', A.apellido1,' ', A.apellido2) as nombre, E.id_lote, sum(E.puntos) as puntos, A.repetidor, L.repartit, L.folres, L.valoracioglobal from Ejemplar E, Alumno A, Lote L where E.id_lote = A.id_lote and L.id_lote=E.id_lote and A.id_tutoria=\"";
 		$sentencia = $sentencia . $tutoria . "\" group by E.id_lote, A.apellido1, A.apellido2, A.nombre, L.repartit, L.folres, L.valoracioglobal,A.repetidor order by A.apellido1, A.apellido2, A.nombre";
 		$resultat=executaSentenciaTotsResultats($conexion,$sentencia);
 		return $resultat;
@@ -261,4 +261,11 @@ function conexion($bd_config){
 		$sentencia="select repartit, folres, valoracioglobal from Lote where id_lote=\"" . $id_lote . "\"";
 		$resultat=executaSentencia($conexion, $sentencia);
 		return $resultat;
+	}
+
+	/* Obte la descripcio d'una observacio a partir de l'identificador */
+	function descripcioObservacio($conexion, $id_observacion){
+		$sentencia="select descripcion from Observacion where id_observacion=\"". $id_observacion . "\"";
+		$resultat = executaSentencia($conexion,$sentencia);
+		return $resultat["descripcion"];
 	}
