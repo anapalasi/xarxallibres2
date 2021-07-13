@@ -14,8 +14,7 @@
 	$tutorias= tutoriasConLibros($conexion);
 
 
-	$cabecera=array('Alumne','Lot','Tutoria');
-    $anchura=array(80,30,30);
+	
 
 	
     $pdf = new PDF();
@@ -54,18 +53,27 @@
         	$pdf->Cell(0,10,"Repartit:" . $repartit. " Folres:" . $folres);
         	$pdf->Ln();
         	$pdf->Cell(0,10,"Comentari: " . $alumne["valoracioglobal"]);
+        	$pdf->Ln();
+           	$pdf->SetFont('Arial','B',12);
+        	$pdf->Cell(0,10,"Dades dels llibres");
+        	$pdf->Ln();
+        	$pdf->SetFont('Arial','B',10);
+        	$cabecera=array('Títol','Id_Ejemplar','Volum','Estat','Observacions');
+   			$anchura=array(70,25,20,20,60);
+   			 // Imprimimos la cabecera
+   			$i=0;
+	        foreach($cabecera as $col){
+	                $pdf->Cell($anchura[$i],7,utf8_decode($col),1,0,"C"); 
+	                $i++;
+	        }
+	        $pdf->Ln();
+      		$llibres=mostraLlibresAlumne($conexion,$alumne["nia"]);
+      		$pdf->Cell(0,10,count($llibres));
 
     	}
         
 
-        // Imprimimos la cabecera
-   /*     $i=0;
-        foreach($cabecera as $col){
-                $pdf->Cell($anchura[$i],7,utf8_decode($col),1,0,"C"); 
-                $i++;
-        }
-        $pdf->Ln();
-      
+/*       
         $files= senseFolres($conexion);
         foreach ($files as $valor){
                 $i=0;
