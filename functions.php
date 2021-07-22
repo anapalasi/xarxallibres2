@@ -258,7 +258,7 @@ function conexion($bd_config){
 
 	/* Funció que obte les dades d'un lot */
 	function dadesLot($conexion, $id_lote){
-		$sentencia="select repartit, folres, valoracioglobal from Lote where id_lote=\"" . $id_lote . "\"";
+		$sentencia="select repartit, folres, valoracioglobal, retirat from Lote where id_lote=\"" . $id_lote . "\"";
 		$resultat=executaSentencia($conexion, $sentencia);
 		return $resultat;
 	}

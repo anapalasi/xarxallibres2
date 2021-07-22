@@ -41,7 +41,7 @@
     echo "<form action=\"actualizaLot.php\" method=\"post\" width=\"100%\">";
     echo "<input type=\"hidden\" name=\"lote\" value=\"". $lote ."\">";
     echo "<h3 class=\"texto\"> Dades del lot </h3><br>";
-    echo "<table border=\"0\"><tr><td width=\"200\">";
+    echo "<table border=\"0\"><tr><td>";
     echo "Repartit <input type=\"checkbox\" name=\"repartit\" ";
     $repartit=$dadesLot["repartit"];
     if ($repartit == "1"){
@@ -49,7 +49,7 @@
     }
     echo ">";
     echo "</td>";
-    echo "<td width=\"200\">";
+    echo "<td>";
      echo "Folres <input type=\"checkbox\" name=\"folres\" ";
     $folres=$dadesLot["folres"];
     if ($folres == "1"){
@@ -58,6 +58,16 @@
     echo ">";
   
     echo "</td>";
+     echo "<td>";
+     echo "Retirat <input type=\"checkbox\" name=\"retirat\" ";
+    $retirat=$dadesLot["retirat"];
+    if ($retirat == "1"){
+        echo "checked ";
+    }
+    echo ">";
+  
+    echo "</td>";
+    echo "</tr>";
     echo "<tr><td colspan=\"2\">";
     echo "<input type=\"text\" name=\"valoracioglobal\" value=\"". $dadesLot["valoracioglobal"]. "\" size=\"60\">";
     echo "</td>";
