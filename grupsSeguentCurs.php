@@ -41,9 +41,8 @@
 	echo "<center><h1 class=\"texto\"> Alumnes de ";
 	echo $tutoria;
 	echo " en el curs 20/21 </h1></center>";
-	echo count($nuevasTutorias);
 	echo "<br><br>";
-	echo " <form action=\"nousGrups.php\" method=\"post\" width=\"100%\">";
+	echo " <form action=\"assignacioNousGrups.php\" method=\"post\" width=\"100%\">";
 	echo " <table border=\"1\" align=\"center\" bgcolor=\"white\" width=\"100%\">";
 	echo "<tr><th> Nom </th> <th> Cognoms </th><th> Tutoria actual </th><th> Nova tutoria </th></tr>";
 
@@ -62,10 +61,11 @@
                 echo "<select name=\"nuevaTutoria[]\">";
 				echo "<option value=\"no\"> No assignada </option> ";
 				foreach ($nuevasTutorias as $nuevaTutoria){
+					$tut_actual=$nuevaTutoria['id_tutoria'];
 					echo "<option value=\"";
-					echo $nuevaTutoria['id_tutoria'];
-					echo ">";
-					echo $nuevaTutoria['id_tutoria'];
+					echo $tut_actual;
+					echo "\">";
+					echo $tut_actual;
 					echo "</option>";
 				}
 				
