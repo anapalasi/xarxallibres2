@@ -33,6 +33,7 @@
 <br> <a href="altaAlumno.php"> Donar d'alta a un alumne </a><br>
 <br> <h3 class="texto"> Gestió assignació de llibres </h3>
 <br> <a href="nousGrups.php"> Assignació de grups del següent curs</a><br>
+<br><a href="simulacioAssignacio.php"> Simulació assignació llibres per cursos </a><br>
 <br><h3 class="texto"> Altres operacions </h3>
         <br> <a href="demanaLot.php"> Actualitzar informacio d'un lot </a>
         <br> <a href="puntuacionsLots.php"> Consultar puntuacions lots </a>

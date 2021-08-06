@@ -269,3 +269,126 @@ function conexion($bd_config){
 		$resultat = executaSentencia($conexion,$sentencia);
 		return $resultat["descripcion"];
 	}
+
+	/* Funcion que permite buscar la posición de un lote. Si no está devuelve -1 */
+/*	function posicionLote($array_lotes, $id_lote){
+
+		$noencontrado=1;
+		$pos=0;
+
+		while ($noencontrado and $pos<count($array_lote)){
+			if (strcmp($array_lotes[$pos]['id_lote'],$id_lote))
+				$no_encontrado=0;
+			$pos++;
+		}
+
+		if ($noencontrado)
+			return -1;
+		else
+			return $pos;
+	}*/
+
+	/* Funció que a partir d'un conjunt d'alumnes i lots torna l'assignació. Tant els alumnes com els lots estan ordenats de major a menor*/
+	function assignaLotsAlumnes($alumnes, $lots){
+		
+		// Creamos un array asociativo con todos los lotes añadiendo uno que indique si se ha asignado o no
+		$lotsPerAssignar=array();
+
+		// Array con las aulas donde se encuentran los lotes
+		$aulas=array();
+
+		foreach ($lots as $lot){
+			$aux['id_lote']=$lot['id_lote'];
+			$aux['puntos']=$lot['puntos'];
+			$aux['repartit']=$lot['repartit'];
+			if ($lot['retirat']){
+				$aux['id_aula']="Magatzem";
+			}
+			else{
+				$aula=$lot['id_aula'];
+				$aux['id_aula']= $aula;
+				if (!estaEnArray($aulas,$aula))
+					array_push($aulas, $aula);
+			}
+			$aux['usat']=0;
+
+			array_push($lotsPerAssignar, $aux);
+		}
+
+		// Ordenamos de menor a mayor las aulas que contienen lotes
+		asort($aulas);
+
+		// Obtenemos las aulas de los alumnos
+		$aulasAlumnos=array();
+
+		foreach ($alumnes as $alumne){
+			$aula = $alumne['id_aula'];
+			if (!estaEnArray($aulasAlumnos,$aula))
+				array_push($aulasAlumnos, $aula);
+		}
+
+		asort($aulasAlumnos);
+
+		// Comprobamos si alguna de las aulas de los alumnos coincide con la de los libros
+		$noCoinciden=1;
+		$num_aulas=count($aulasAlumnos);
+		$i=0;
+
+		while ($noCoinciden and $i<$num_aulas)
+		{
+			if (estaEnArray($aulas,$aulasAlumnos[$i]))
+				$noCoinciden=0;
+			$i++;
+		}
+
+		$lotsAssignats=array();
+
+		// Comprobamos si tenemos mayor numero de lotes que de alumnos
+		if (count($alumnes) >= count($lots))
+			$maxim=count($lots);
+		else
+			$maxim=count($alumnes);
+
+		if ($noCoinciden){
+			// En este caso los lotes se asignan por orden
+			echo "No hay aulas coincidentes";
+
+
+			for ($i=0;$i<$maxim;$i++){
+				$lot=array();
+
+				$lot['nia'] = $alumnes[$i]['nia'];
+				$lot['nombre'] = $alumnes[$i]['nombre'];
+				$lot['apellido1'] = $alumnes[$i]['apellido1'];
+				$lot['apellido2']= $alumnes[$i]['apellido2'];
+				$lot['id_tutoria']=$alumne[$i]['id_tutoria'];
+				$lot['id_lote']=$lots[$i]['id_lote'];
+				$lot['puntos']=$lots[$i]['puntos'];
+				if ($lot[$i]['retirat'])
+					$lot['id_aula']="Magatzem";
+				else
+					$lot['id_aula']=$lots[$i]['id_aula'];
+
+				array_push($lotsAssignats, $lot);
+			}
+		}
+		else
+		{
+			echo "Hay aulas coincidentes";
+		}
+
+		echo "Valores <br>";
+		foreach ($lotsAssignats as $lot){
+			foreach ($lot as $key => $value) {
+				echo " " . $key . " : ". $value;
+			}
+			echo "<br>";
+		}
+	
+		return $lotsPerAssignar;
+
+		
+
+		
+
+	}
