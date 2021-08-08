@@ -415,7 +415,6 @@ function conexion($bd_config){
 					// Busquem la posició a assignar
 					$pos=posicionLotePuntosAula($lotsPerAssignar, $lots[$i]['puntos'],$aulaAlumne);
 					$lotsPerAssignar[$pos]['usat']=1;
-
 					$lot=array();
 					$lot['nia']=$alumnes[$i]['nia'];
 				
