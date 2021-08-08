@@ -276,9 +276,8 @@ function conexion($bd_config){
 		$noencontrado=1;
 		$primeraPosicionPunts=-1;
 		$pos=0;
-
 		while ($noencontrado and $pos<count($array_lotes)){
-			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes[$pos]['usat'] == 0)){
+			if ((strcmp($array_lotes[$pos]['puntos'],$puntos) ==0) and ($array_lotes[$pos]['usat'] == 0)){
 				if ($primeraPosicionPunts == -1)
 					$primeraPosicionPunts=$pos;
 				if (strcmp($array_lotes['id_aula'],$id_aula))
@@ -303,7 +302,7 @@ function conexion($bd_config){
 		$pos=0;
 
 		while ($noencontrado and $pos<count($array_lotes)){
-			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes[$pos]['usat'] == 0)){
+			if ((strcmp($array_lotes[$pos]['puntos'],$puntos) ==0) and ($array_lotes[$pos]['usat'] == 0)){
 					//Hem trobat la posició adequada
 					$noencontrado=0;
 			} 
@@ -319,7 +318,7 @@ function conexion($bd_config){
 	/* Funció que a partir d'un conjunt d'alumnes i lots torna l'assignació. Tant els alumnes com els lots estan ordenats de major a menor*/
 	function assignaLotsAlumnes($alumnes, $lots){
 		
-		
+
 		// Array con las aulas donde se encuentran los lotes
 		$aulas=array();
 
@@ -414,7 +413,7 @@ function conexion($bd_config){
 				if (estaEnArray($aulas, $aulaAlumne))
 				{
 					// Busquem la posició a assignar
-					$pos=posicionLotePuntosAula($lotsPerAssignar, $alumnes[$i]['puntos'],$aulaAlumne);
+					$pos=posicionLotePuntosAula($lotsPerAssignar, $lots[$i]['puntos'],$aulaAlumne);
 					$lotsPerAssignar[$pos]['usat']=1;
 
 					$lot=array();
@@ -441,7 +440,8 @@ function conexion($bd_config){
 				if (!estaEnArray($aulas,$aulaAlumne))
 				{
 					// Buscarem un lot a assignar amb la puntuacio
-					$pos=posicionLotePuntos($lotsPerAssignar, $alumnes[$i]['puntos']);
+					$pos=posicionLotePuntos($lotsPerAssignar, $lots[$i]['puntos']);
+
 					$lotsPerAssignar[$pos]['usat']=1;
 
 					$lot=array();
