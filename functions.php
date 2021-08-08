@@ -463,11 +463,15 @@ function conexion($bd_config){
 		}
 
 		echo "Valores <br>";
+		$i=1;
 		foreach ($lotsAssignats as $lot){
+			echo $i. "->";
 			foreach ($lot as $key => $value) {
-				echo " " . $key . " : ". $value;
+				echo  " " . $key . " : ". $value;
 			}
 			echo "<br>";
+			$i++;
+
 		}
 	
 		return $lotsAssignats;
