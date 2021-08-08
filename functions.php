@@ -278,7 +278,7 @@ function conexion($bd_config){
 		$pos=0;
 
 		while ($noencontrado and $pos<count($array_lotes)){
-			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes['usat'] == 0)){
+			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes[$pos]['usat'] == 0)){
 				if ($primeraPosicionPunts == -1)
 					$primeraPosicionPunts=$pos;
 				if (strcmp($array_lotes['id_aula'],$id_aula))
@@ -303,7 +303,7 @@ function conexion($bd_config){
 		$pos=0;
 
 		while ($noencontrado and $pos<count($array_lotes)){
-			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes['usat'] == 0)){
+			if (strcmp($array_lotes[$pos]['puntos'],$puntos) and ($array_lotes[$pos]['usat'] == 0)){
 					//Hem trobat la posició adequada
 					$noencontrado=0;
 			} 
@@ -410,9 +410,7 @@ function conexion($bd_config){
 				// Comprovem si l'aula està entre les aules amb llibres
 				$aulaAlumne=$alumnes[$i]['id_aula'];
 
-				// Guardem els nies Assignats
-				$niesAssignats=array();
-
+			
 				if (estaEnArray($aulas, $aulaAlumne))
 				{
 					// Busquem la posició a assignar
@@ -421,7 +419,7 @@ function conexion($bd_config){
 
 					$lot=array();
 					$lot['nia']=$alumnes[$i]['nia'];
-					array_push($niesAssignats,$alumnes[$i]['nia']);
+				
 					$lot['nombre']=$alumnes[$i]['nombre'];
 					$lot['apellido1']=$alumnes[$i]['apellido1'];
 					$lot['apellido2']=$alumnes[$i]['apellido2'];
@@ -431,15 +429,16 @@ function conexion($bd_config){
 						$lot['id_aula']="Magatzem";
 					else
 						$lot['id_aula']=$lotsPerAssignar[$pos]['id_aula'];
-
 					array_push($lotsAssignats, $lot);
 				}
 			}
-
+			
 			// Ara assignarem la resta d'alumnes que no coincideixen en l'aula
 			for ($i=0;$i<$maxim;$i++){
-				// Comprovarem si el nia ja està assignat
-				if (!estaEnArray($niesAssignats,$alumnes[$i]['nia']))
+				// Aula
+				$aulaAlumne = $alumnes[$i]['id_aula'];
+
+				if (!estaEnArray($aulas,$aulaAlumne))
 				{
 					// Buscarem un lot a assignar amb la puntuacio
 					$pos=posicionLotePuntos($lotsPerAssignar, $alumnes[$i]['puntos']);

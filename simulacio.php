@@ -66,6 +66,29 @@
 
 		assignaLotsAlumnes($alumnosLetras, $llibresLletres);
 
+		echo "<h1>ALUMNOS APLICADAS </h1>";
+
+		$sentencia = "SELECT A.nia, A.nombre, A.apellido1, A.apellido2, H.puntos, T.id_aula, A.repetidor FROM Historico H, Alumno A, Tutoria T where H.nia = A.nia and A.opcion=\"AP\" and A.id_tutoria like '21_4ESO%' and banc_llibres=1 and T.id_tutoria=A.id_tutoria and H.curso=\"2020\" and A.repetidor=0 order by H.puntos desc";
+
+		$alumnosAplicadas=executaSentenciaTotsResultats($conexion,$sentencia);
+
+		$sentencia="SELECT H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAP%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
+		$llibresAplicades=executaSentenciaTotsResultats($conexion,$sentencia);
+
+		echo "Alumnos: " . count($alumnosAplicadas) . " Lotes: ". count($llibresAplicades). " <br>";
+		
+		if (count($alumnosAplicadas)> count($llibresAplicades))
+		{
+			echo "Hay más alumnos que lotes";
+		}
+		elseif (count($alumnosAplicadas)<count($llibresAplicades)) {
+			echo "Hay menos alumnos que lotes";
+		}
+		else{
+			echo "Hay el mismo número de lotes que de alumnos";
+		}
+
+		assignaLotsAlumnes($alumnosAplicadas, $llibresAplicades);
 	}
 
 	
