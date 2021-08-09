@@ -112,7 +112,7 @@
 		}
 	}
 
-	
+	require 'views/simulacio.view.php';
 
 
 	/*echo "<!DOCTYPE html>";
