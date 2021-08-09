@@ -98,6 +98,31 @@
       echo "</table></center>";
 
       echo "<h2 class=\"texto\"> Alumnat sense lot </h2>";
+
+       echo "<center><table border=\"1\" bgcolor=\"white\" align=\"center\"> <tr><th> NIA </th><th> Nombre </th> <th> Opcio </th><th>Puntos</th><th> Aula on està l'alumne</th></tr>";
+      foreach ($alumnesSenseAssignar as $alumnat){
+        echo "<tr>";
+        echo "<td>";
+        echo $alumnat['nia'];
+        echo "</td>";
+         echo "<td>";
+        echo utf8_encode($alumnat['nombre']). " ".utf8_encode($alumnat['apellido1']). " ".utf8_encode($alumnat['apellido2']) ;
+        echo "</td>";
+         echo "<td>";
+        echo $alumnat['opcion'];
+        echo "</td>";
+         echo "<td>";
+        echo $alumnat['puntos'];
+        echo "</td>";
+         echo "<td>";
+        echo $alumnat['id_aula'];
+        echo "</td>";
+        echo "</tr>";
+
+      }
+
+      echo "</table></center>";
+
       echo "<h2 class=\"texto\"> Lots sense assignar </h2>";
 
 
