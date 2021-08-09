@@ -40,7 +40,14 @@
 			echo "Hay el mismo número de lotes que de alumnos";
 		}
 
-		assignaLotsAlumnes($alumnosCiencias, $llibresCiencies);
+		$assignacio=assignaLotsAlumnes($alumnosCiencias, $llibresCiencies);
+		// Si hem dit que l'assigne ho fa
+		if (strcmp($_POST['assignacio'],"on")==0){
+			foreach ($assignacio as $lot){
+				$sentencia="update Alumno set id_lote=\"". $lot['id_lote']. "\" where nia=\"". $lot['nia']."\"";
+				executaSentencia($conexion,$sentencia);
+			}
+		}
 
 		echo "<h1>ALUMNOS LETRAS </h1>";
 
@@ -64,7 +71,14 @@
 			echo "Hay el mismo número de lotes que de alumnos";
 		}
 
-		assignaLotsAlumnes($alumnosLetras, $llibresLletres);
+		$assignacio=assignaLotsAlumnes($alumnosLetras, $llibresLletres);
+		// Si hem dit que l'assigne ho fa
+		if (strcmp($_POST['assignacio'],"on")==0){
+			foreach ($assignacio as $lot){
+				$sentencia="update Alumno set id_lote=\"". $lot['id_lote']. "\" where nia=\"". $lot['nia']."\"";
+				executaSentencia($conexion,$sentencia);
+			}
+		}
 
 		echo "<h1>ALUMNOS APLICADAS </h1>";
 
@@ -88,7 +102,14 @@
 			echo "Hay el mismo número de lotes que de alumnos";
 		}
 
-		assignaLotsAlumnes($alumnosAplicadas, $llibresAplicades);
+		$assignacio=assignaLotsAlumnes($alumnosAplicadas, $llibresAplicades);
+		// Si hem dit que l'assigne ho fa
+		if (strcmp($_POST['assignacio'],"on")==0){
+			foreach ($assignacio as $lot){
+				$sentencia="update Alumno set id_lote=\"". $lot['id_lote']. "\" where nia=\"". $lot['nia']."\"";
+				executaSentencia($conexion,$sentencia);
+			}
+		}
 	}
 
 	
