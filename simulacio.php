@@ -25,14 +25,13 @@
 
 		// Obtenemos los que no son repetidores (mirar si estos cambian de itinerario y en ese caso poner el valor a 0)
 
-		$sentencia = "SELECT A.nia, A.nombre, A.apellido1, A.apellido2, H.puntos, T.id_aula, A.repetidor FROM Historico H, Alumno A, Tutoria T where H.nia = A.nia and A.opcion=\"AC\" and A.id_tutoria like '21_4ESO%' and banc_llibres=1 and T.id_tutoria=A.id_tutoria and H.curso=\"2020\" and A.repetidor=0 order by H.puntos desc";
+		$sentencia = "SELECT A.nia, A.nombre, A.apellido1, A.apellido2, H.puntos, T.id_aula, A.repetidor, A.id_tutoria FROM Historico H, Alumno A, Tutoria T where H.nia = A.nia and A.opcion=\"AC\" and A.id_tutoria like '21_4ESO%' and banc_llibres=1 and T.id_tutoria=A.id_tutoria and H.curso=\"2020\" and A.repetidor=0 order by H.puntos desc";
 
 		$alumnosCiencias=executaSentenciaTotsResultats($conexion,$sentencia);
 
 		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAC%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
 		$llibresCiencies=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos ciencias: " . count($alumnosCiencias) . " Lotes: ". count($llibresCiencies). " <br>";
 		
 		if (count($alumnosCiencias)> count($llibresCiencies))
 		{
@@ -57,7 +56,6 @@
 			}
 		}
 
-		echo "<h1>ALUMNOS LETRAS </h1>";
 
 		$sentencia = "SELECT A.nia, A.nombre, A.apellido1, A.apellido2, H.puntos, T.id_aula, A.repetidor FROM Historico H, Alumno A, Tutoria T where H.nia = A.nia and A.opcion=\"AL\" and A.id_tutoria like '21_4ESO%' and banc_llibres=1 and T.id_tutoria=A.id_tutoria and H.curso=\"2020\" and A.repetidor=0 order by H.puntos desc";
 
@@ -66,7 +64,6 @@
 		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAL%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc";
 		$llibresLletres=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos letras: " . count($alumnosLetras) . " Lotes: ". count($llibresLletres). " <br>";
 		
 		if (count($alumnosLetras)> count($llibresLletres))
 		{
@@ -92,7 +89,6 @@
 			}
 		}
 
-		echo "<h1>ALUMNOS APLICADAS </h1>";
 
 		$sentencia = "SELECT A.nia, A.nombre, A.apellido1, A.apellido2, H.puntos, T.id_aula, A.repetidor FROM Historico H, Alumno A, Tutoria T where H.nia = A.nia and A.opcion=\"AP\" and A.id_tutoria like '21_4ESO%' and banc_llibres=1 and T.id_tutoria=A.id_tutoria and H.curso=\"2020\" and A.repetidor=0 order by H.puntos desc";
 
@@ -101,7 +97,6 @@
 		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAP%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
 		$llibresAplicades=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos aplicados: " . count($alumnosAplicadas) . " Lotes: ". count($llibresAplicades). " <br>";
 		
 		if (count($alumnosAplicadas)> count($llibresAplicades))
 		{
