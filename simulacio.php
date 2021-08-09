@@ -14,6 +14,8 @@
 
 	// Array per mostrar els resultats en forma de taula
 	$mostrarAssignacions=array();
+	$llibresSenseAssignar=array();
+	$alumnesSenseAssignar=array();
 	
 	// Obtenemos los alumnos del nivel elegido
 
@@ -27,14 +29,15 @@
 
 		$alumnosCiencias=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		$sentencia="SELECT H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAC%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
+		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAC%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
 		$llibresCiencies=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos: " . count($alumnosCiencias) . " Lotes: ". count($llibresCiencies). " <br>";
+		echo "Alumnos ciencias: " . count($alumnosCiencias) . " Lotes: ". count($llibresCiencies). " <br>";
 		
 		if (count($alumnosCiencias)> count($llibresCiencies))
 		{
-			echo "Hay más alumnos que lotes";
+			for ($i=count($llibresCiencies);$i<count($alumnosCiencias);$i++)
+				array_push($alumnesSenseAssignar, $alumnosCiencias[$i]);
 		}
 		elseif (count($alumnosCiencias)<count($llibresCiencies)) {
 			echo "Hay menos alumnos que lotes";
@@ -59,14 +62,15 @@
 
 		$alumnosLetras=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		$sentencia="SELECT H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAL%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc";
+		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAL%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc";
 		$llibresLletres=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos: " . count($alumnosLetras) . " Lotes: ". count($llibresLletres). " <br>";
+		echo "Alumnos letras: " . count($alumnosLetras) . " Lotes: ". count($llibresLletres). " <br>";
 		
 		if (count($alumnosLetras)> count($llibresLletres))
 		{
-			echo "Hay más alumnos que lotes";
+			for ($i=count($llibresLletres);$i<count($alumnosLetras);$i++)
+				array_push($alumnesSenseAssignar, $alumnosLetras[$i]);
 		}
 		elseif (count($alumnosLetras)<count($llibresLletres)) {
 			echo "Hay menos alumnos que lotes";
@@ -92,14 +96,15 @@
 
 		$alumnosAplicadas=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		$sentencia="SELECT H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAP%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
+		$sentencia="SELECT distinct H.id_lote, H.puntos,T.id_aula, L.retirat, L.repartit from Historico H, Tutoria T, Lote L, Alumno A where T.id_tutoria=H.id_tutoria and L.id_lote=H.id_lote and H.id_lote like '4ESOAP%' and H.curso=\"2020\" and A.id_lote=L.id_lote and A.repetidor=0  and L.repartit=0 order by H.puntos desc, T.id_aula asc ";
 		$llibresAplicades=executaSentenciaTotsResultats($conexion,$sentencia);
 
-		echo "Alumnos: " . count($alumnosAplicadas) . " Lotes: ". count($llibresAplicades). " <br>";
+		echo "Alumnos aplicados: " . count($alumnosAplicadas) . " Lotes: ". count($llibresAplicades). " <br>";
 		
 		if (count($alumnosAplicadas)> count($llibresAplicades))
 		{
-			echo "Hay más alumnos que lotes";
+			for ($i=count($llibresAplicades);$i<count($alumnosAplicadas);$i++)
+				array_push($alumnesSenseAssignar, $alumnosAplicadas[$i]);
 		}
 		elseif (count($alumnosAplicadas)<count($llibresAplicades)) {
 			echo "Hay menos alumnos que lotes";
@@ -123,76 +128,7 @@
 	require 'views/simulacio.view.php';
 
 
-	/*echo "<!DOCTYPE html>";
-	echo "<html lang=\"en\">";
-	echo "<head>";
- 	echo "<meta charset=\"utf-8\">";
-  	echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
-  	echo "<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">";
- 	echo "<link rel=\"stylesheet\" href=\"css/font-awesome.min.css\">";
-    echo "<link rel=\"stylesheet\" href=\"css/style.css\">";
-    echo "<title>Nous grups curs 21/22 </title> ";
-    echo "<head>";
-	echo "<body class=\"bg-image\">";
-	echo "<p align=\"center\"> <img src=\"img/xarxa_llibres-300x150.png\" alt=\"Logo Xarxa Llibres\"></p><br>";
-	echo "<center><h1 class=\"texto\"> Alumnes de ";
-	echo $tutoria;
-	echo " en el curs 20/21 </h1></center>";
-	echo "<br><br>";
-	echo " <form action=\"assignacioNousGrups.php\" method=\"post\" width=\"100%\">";
-	echo " <table border=\"1\" align=\"center\" bgcolor=\"white\" width=\"100%\">";
-	echo "<tr><th> Nom </th> <th> Cognoms </th><th> Tutoria actual </th><th> Nova tutoria </th></tr>";
 
- 
-	foreach ($alumnos as $alumno){
-		
-		$nia = $alumno["nia"];
-		echo  "<tr align=\"center\"><td>";
-
-		echo "<input type=\"hidden\" name=\"nia[]\" value=\"";
-		echo $nia;
-		echo "\">";
-	      echo  utf8_encode($alumno["nombre"]) . "</td> <td>" . utf8_encode($alumno["apellido1"]);
-                echo  " " . utf8_encode($alumno["apellido2"]) ."</td><td>";
-                echo  $alumno["id_tutoria"] . "</td><td>";
-                echo "<select name=\"nuevaTutoria[]\">";
-				echo "<option value=\"no\"> No assignada </option> ";
-				foreach ($nuevasTutorias as $nuevaTutoria){
-					$tut_actual=$nuevaTutoria['id_tutoria'];
-					echo "<option value=\"";
-					echo $tut_actual;
-					echo "\">";
-					echo $tut_actual;
-					echo "</option>";
-				}
-				
-		echo "</select>";
-		echo   "</td></tr>";
-	
-        }
-
-        echo "</table>";
- 		echo "<br><br>";
- 		echo "<p align=\"center\"> <button type=\"reset\" value=\"reset\"> Valors inicials </button>"; 
- 		echo "<button type=\"submit\" value=\"submit\"> Guardar canvis </button>  </p> ";
- 		echo "</form>";
- 		echo "<center> <a href=\"";
-
-  if ($usuario['rol'] == 'administrador')
-  {
-    echo "admin.php";
-  }
-  else
-  {
-    echo "usuario.php";
-  }
-
-echo "\">";
-echo "<img src=\"img/casa.png\" width=\"5%\"></a></center>";
-echo "<br>";
-echo "<a href=\"close.php\">Cerrar Sesion</a>";
-echo "</body>";
-echo "</html>";*/
 ?>
  
  
