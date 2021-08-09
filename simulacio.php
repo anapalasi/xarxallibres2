@@ -11,6 +11,9 @@
 	//echo $_POST['tutoria'];
 
 	$conexion = conexion($bd_config);
+
+	// Array per mostrar els resultats en forma de taula
+	$mostrarAssignacions=array();
 	
 	// Obtenemos los alumnos del nivel elegido
 
@@ -41,6 +44,7 @@
 		}
 
 		$assignacio=assignaLotsAlumnes($alumnosCiencias, $llibresCiencies);
+		array_push($mostrarAssignacions, $assignacio);
 		// Si hem dit que l'assigne ho fa
 		if (strcmp($_POST['assignacio'],"on")==0){
 			foreach ($assignacio as $lot){
@@ -72,6 +76,8 @@
 		}
 
 		$assignacio=assignaLotsAlumnes($alumnosLetras, $llibresLletres);
+		array_push($mostrarAssignacions, $assignacio);
+
 		// Si hem dit que l'assigne ho fa
 		if (strcmp($_POST['assignacio'],"on")==0){
 			foreach ($assignacio as $lot){
@@ -103,6 +109,8 @@
 		}
 
 		$assignacio=assignaLotsAlumnes($alumnosAplicadas, $llibresAplicades);
+		array_push($mostrarAssignacions, $assignacio);
+
 		// Si hem dit que l'assigne ho fa
 		if (strcmp($_POST['assignacio'],"on")==0){
 			foreach ($assignacio as $lot){
