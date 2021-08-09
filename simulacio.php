@@ -40,7 +40,8 @@
 				array_push($alumnesSenseAssignar, $alumnosCiencias[$i]);
 		}
 		elseif (count($alumnosCiencias)<count($llibresCiencies)) {
-			echo "Hay menos alumnos que lotes";
+			for ($i=count($alumnosCiencias);$i<count($llibresCiencies);$i++)
+				array_push($llibresSenseAssignar, $llibresCiencies[$i]);
 		}
 		else{
 			echo "Hay el mismo número de lotes que de alumnos";
@@ -73,7 +74,8 @@
 				array_push($alumnesSenseAssignar, $alumnosLetras[$i]);
 		}
 		elseif (count($alumnosLetras)<count($llibresLletres)) {
-			echo "Hay menos alumnos que lotes";
+			for ($i=count($alumnosLetras);$i<count($llibresLletres);$i++)
+				array_push($llibresSenseAssignar, $llibresLletres[$i]);
 		}
 		else{
 			echo "Hay el mismo número de lotes que de alumnos";
@@ -107,7 +109,8 @@
 				array_push($alumnesSenseAssignar, $alumnosAplicadas[$i]);
 		}
 		elseif (count($alumnosAplicadas)<count($llibresAplicades)) {
-			echo "Hay menos alumnos que lotes";
+			for ($i=count($alumnosAplicadas);$i<count($llibresAplicades);$i++)
+				array_push($llibresSenseAssignar, $llibresAplicades[$i]);
 		}
 		else{
 			echo "Hay el mismo número de lotes que de alumnos";
