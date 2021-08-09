@@ -29,11 +29,12 @@
 
 
 
-
-	
 		</select>
 		</td>
 	</tr>
+  <tr>
+    <td colspan="2"><input type="checkbox" name="assignacio"> Assignar lots de l'assignació</td>
+  </tr>
 
 	</table>
 <br><br>	
