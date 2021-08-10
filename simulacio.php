@@ -35,8 +35,11 @@
 		
 		if (count($alumnosCiencias)> count($llibresCiencies))
 		{
-			for ($i=count($llibresCiencies);$i<count($alumnosCiencias);$i++)
+			for ($i=count($llibresCiencies);$i<count($alumnosCiencias);$i++){
 				array_push($alumnesSenseAssignar, $alumnosCiencias[$i]);
+			
+				
+			}
 		}
 		elseif (count($alumnosCiencias)<count($llibresCiencies)) {
 			for ($i=count($alumnosCiencias);$i<count($llibresCiencies);$i++)
@@ -67,8 +70,10 @@
 		
 		if (count($alumnosLetras)> count($llibresLletres))
 		{
-			for ($i=count($llibresLletres);$i<count($alumnosLetras);$i++)
+			for ($i=count($llibresLletres);$i<count($alumnosLetras);$i++){
 				array_push($alumnesSenseAssignar, $alumnosLetras[$i]);
+				
+			}
 		}
 		elseif (count($alumnosLetras)<count($llibresLletres)) {
 			for ($i=count($alumnosLetras);$i<count($llibresLletres);$i++)
@@ -100,8 +105,10 @@
 		
 		if (count($alumnosAplicadas)> count($llibresAplicades))
 		{
-			for ($i=count($llibresAplicades);$i<count($alumnosAplicadas);$i++)
+			for ($i=count($llibresAplicades);$i<count($alumnosAplicadas);$i++){
 				array_push($alumnesSenseAssignar, $alumnosAplicadas[$i]);
+				
+			}
 		}
 		elseif (count($alumnosAplicadas)<count($llibresAplicades)) {
 			for ($i=count($alumnosAplicadas);$i<count($llibresAplicades);$i++)
@@ -120,6 +127,11 @@
 				$sentencia="update Alumno set id_lote=\"". $lot['id_lote']. "\" where nia=\"". $lot['nia']."\"";
 				executaSentencia($conexion,$sentencia);
 			}
+			foreach ($alumnesSenseAssignar as $alumne){
+				$sentencia = "update Alumno set id_lote=NULL where nia=\"". $alumne['nia']."\"";
+				executaSentencia($conexion, $sentencia);
+			}
+				
 		}
 	}
 
