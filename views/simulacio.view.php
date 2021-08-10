@@ -99,7 +99,7 @@
 
       echo "<h2 class=\"texto\"> Alumnat sense lot </h2>";
 
-       echo "<center><table border=\"1\" bgcolor=\"white\" align=\"center\"> <tr><th> NIA </th><th> Nombre </th> <th> Opcio </th><th>Puntos</th><th> Aula on està l'alumne</th></tr>";
+      echo "<center><table border=\"1\" bgcolor=\"white\" align=\"center\"> <tr><th> NIA </th><th> Nombre </th> <th> Opcio </th><th>Puntos</th><th> Aula on està l'alumne</th></tr>";
       foreach ($alumnesSenseAssignar as $alumnat){
         echo "<tr>";
         echo "<td>";
@@ -124,6 +124,51 @@
       echo "</table></center>";
 
       echo "<h2 class=\"texto\"> Lots sense assignar </h2>";
+
+      echo "<center><table border=\"1\" bgcolor=\"white\" align=\"center\"> <tr><th> Lot </th><th> Punts </th> <th> Ubicació </th></tr>";
+      foreach ($llibresSenseAssignar as $llibre){
+        echo "<tr>";
+        echo "<td>";
+        echo $llibre['id_lote'];
+        echo "</td>";
+        echo "<td>";
+        echo $llibre['puntos'];
+        echo "</td>";
+        if ($llibre['retirat']){
+          echo "<td> Magatzem </td>";
+        }
+        else{
+
+          echo "<td>";
+          echo $llibre['aula'];
+          echo "</td>";
+        }
+       
+        echo "</tr>";
+
+      }
+
+      echo "</table></center>";
+
+     echo "<h2 class=\"texto\"> Lots sense tornar </h2>";
+
+     $sentencia="SELECT A.nombre, A.apellido1, A.apellido2, L.id_lote, A.repetidor FROM Lote L, Historico H, Alumno A where L.repartit=1 and L.id_lote like '4%' and H.id_lote = L.id_lote and H.curso=\"2020\" and H.nia=A.nia and A.repetidor=\"0\"";
+     $resultat=executaSentenciaTotsResultats($conexion, $sentencia);
+
+    echo "<center><table border=\"1\" bgcolor=\"white\" align=\"center\"> <tr><th> Lot </th><th> Alumne </th></tr>";
+     foreach ($resultat as $lot){
+      echo "<tr>";
+      echo "<td>";
+      echo $lot['id_lote'];
+      echo "</td>";
+      echo "<td>";
+      echo utf8_encode($lot['nombre']). " ". utf8_encode($lot['apellido1']);
+      echo "</td>";
+      echo "</tr>";
+
+     }
+     echo "</table>";
+    
 
 
     }
