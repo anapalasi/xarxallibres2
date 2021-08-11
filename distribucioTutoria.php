@@ -54,11 +54,22 @@
     	$pdf->Ln();
 
     }
-    //$pdf->SetFont('Arial','B',10);
+    $pdf->SetFont('Arial','B',8);
     // Trobar el curs en el que estan matriculats
-    $sentencia="select nombre, apellido1, apellido2 from Alumno where id_lote=\"NULL\" and id_tutoria=\"". $_POST['tutoria']."\" and banc_llibres=\"1\"";
+    $curs=substr($_POST['tutoria'], 3,1);
+
+    $alumnesSenseLot=array();
+    $sentencia="select distinct nombre, apellido1, apellido2 from Alumno where banc_llibres=1 and  id_tutoria=\"". $_POST['tutoria']. "\" and nia not in (select nia from Alumno where id_tutoria=\"". $_POST['tutoria']. "\" and id_lote like '". $curs. "ESO%')";
     $alumnesSenseLot=executaSentenciaTotsResultats($conexion,$sentencia);
 
+  
+
+ 
+    //$pdf->Cell(0,10,$sentencia);
+
+   
+
+    
     if (count($alumnesSenseLot) != 0){
 
     	$pdf->SetFont('Arial','B',10);
