@@ -14,6 +14,8 @@
 	$sentencia= "select id_tutoria, descripcion, id_aula from Tutoria where id_tutoria=\"". $_POST['tutoria']. "\"";
 	$tutoria=executaSentencia($conexion,$sentencia);
 
+	$sentencia="select A.nombre, A.apellido1, A.apellido2, A.id_lote, T.id_aula, L.retirat from Alumno A, Historico H, Tutoria T, Lote L where A.id_tutoria=\"". $_POST['tutoria']."\" and A.id_lote = H.id_lote and H.curso=\"2020\" and H.id_tutoria=T.id_tutoria and L.id_lote=A.id_lote order by A.apellido1, A.apellido2, A.nombre";
+	$alumnos = executaSentenciaTotsResultats($conexion, $sentencia);
 	
     $pdf = new PDF();
     $pdf->AliasNbPages();
@@ -21,141 +23,58 @@
     $pdf->SetFont('Arial','B',16);
     $pdf->Cell(0,10,$tutoria['descripcion'],0,0,"C");
     $pdf->Ln();
+    $pdf-> SetFont('Arial','B',12);
+    $pdf->Cell(0,10,"Aula: " . $tutoria['id_aula'],0,0,"C");
     $pdf->Ln();
-   /*foreach ($tutorias as $tutoria) {
+    $pdf->Ln();
+    $pdf->SetFont('Arial','B',10);
+    $cabecera=array('Alumne/a','Lot','Ubicació del lot');
+   	$anchura=array(100,45,45);
+	$i=0;
+	foreach($cabecera as $col){
+	    $pdf->Cell($anchura[$i],7,utf8_decode($col),1,0,"C"); 
+	    $i++;
+	}
+	$pdf->Ln();
+    $pdf->SetFont('Arial','',10);
+    foreach ($alumnos as $alumno){
+    
+    	$altura=10;
 
-    	$id_tutoria=$tutoria["id_tutoria"];
-    	$alumnes = puntuacioLotsTutoria($conexion,$id_tutoria);
+    	// Mostramos el nombre
+    	$nombre = utf8_decode($alumno['nombre']). " ". utf8_decode($alumno["apellido1"]). " ". utf8_decode($alumno["apellido2"]);
+    	$pdf->Cell($anchura[0],$altura,$nombre,1,0);
+    	$pdf->Cell($anchura[1],$altura, $alumno['id_lote'],1,0,'C');
 
-    	foreach ($alumnes as $alumne){
-    		$pdf->AddPage();
-        	$pdf->SetFont('Arial','B',16);
-        	$pdf->Cell(0,10,$alumne["nombre"],0,0,"C");
-        	$pdf->Ln();
-       		$pdf->Ln();
-        	$pdf->SetFont('Arial','B',12);
-        	$pdf->Cell(0,10,"Tutoria: " .$tutoria["descripcion"]. "   Lot: ". $alumne["id_lote"] . "   Punts: ". $alumne["puntos"]);
-        	$pdf->Ln();
-        	if ($alumne["repetidor"] == 1)
-        		$repetidor="S";
-        	else
-        		$repetidor="N";
-        	$pdf->Cell(0,10,"Repetidor/a curs 21/22: " . $repetidor);
-        	$pdf->SetFont('Arial','B',10);
-        	if ($alumne["repartit"] == 1)
-        		$repartit="S";
-        	else
-        		$repartit="N";
+    	if ($alumno['retirat'])
+    		$ubicacio="Magatzem";
+    	else
+    		$ubicacio=$alumno['id_aula'];
+    	$pdf->Cell($anchura[2],$altura,$ubicacio,1,0,'C');
+    	$pdf->Ln();
 
-        	if ($alumne["folres"] == 1)
-        		$folres="S";
-        	else
-        		$folres="N";
-        	$pdf->Ln();
-        	$pdf->Cell(0,10,"Repartit:" . $repartit. " Folres:" . $folres);
-        	$pdf->Ln();
-        	$pdf->Cell(0,10,"Comentari: " . $alumne["valoracioglobal"]);
-        	$pdf->Ln();
-           	$pdf->SetFont('Arial','B',12);
-        	$pdf->Cell(0,10,"Dades dels llibres");
-        	$pdf->Ln();
-        	$pdf->SetFont('Arial','',10);
-        	$cabecera=array('Id_Ejemplar','Titol','Estat','Volum','Observacions');
-   		$anchura=array(40,65,15,15,55);
-   		 // Imprimimos la cabecera
-   		$i=0;
-	        foreach($cabecera as $col){
-	                $pdf->Cell($anchura[$i],7,utf8_decode($col),1,0,"C"); 
-	                $i++;
-	        }
-		$pdf->Ln();
-		// Obtenim els llibres de cadascun dels lots
-		$llibres=mostraLlibresLot($conexion,$alumne["id_lote"]);
-
-		// Arrays per saber els llibres a reposar per l'alumnat i pel centre
-		$reposarAlumnat=array();
-		$reposarCentre=array();
-
-		foreach ($llibres as $llibre)
-		{
-			$i=0;
-
-
-			
-			$observacions=observacionsExemplar($conexion, $llibre["id_ejemplar"]);
-			$altura=7;
-			if (count($observacions)>=2){
-				$altura=count($observacions)*$altura;
-			}
-
-			foreach ($llibre as $dato){
-				$pdf->Cell($anchura[$i],$altura,$dato,1,0,"C");
-				$i++;
-			}
-
-			// Si l'exemplar te observacions busquem la seua descripcio
-			if (count($observacions) !=0){
-				$text="";
-				foreach ($observacions as $observacio){
-					$descripcio=descripcioObservacio($conexion,$observacio["id_observacion"]);
-					$text = $text . $descripcio. "\n";
-					if (strcmp($observacio["id_observacion"],"8")==0){
-						array_push($reposarCentre,$llibre["id_ejemplar"]);
-					}
-					else{
-
-						if (strcmp($observacio["id_observacion"],"9")==0){
-							array_push($reposarAlumnat,$llibre["id_ejemplar"]);
-						}
-					}
-				}
-				$text=substr($text,0,-1);
-				$pdf->MultiCell($anchura[$i],7,$text,1,"C",false);
-			}	
-			else {
-				$pdf->Cell($anchura[$i],7,"",1,0,"C");
-				$pdf->Ln();
-			}
-		}
-
-		if (count($reposarCentre) !=0){
-			$pdf->Ln();
-			$pdf->SetFont('Arial','B',12);
-			$pdf->Cell(0,10,"Llibres a reposar pel Centre");
-			$pdf->Ln();
-			$pdf->SetFont('Arial','',10);
-
-			foreach ($reposarCentre as $reposar){
-				$pdf->Cell(0,10,$reposar);
-				$pdf->Ln();
-			}
-		}	
-         	if (count($reposarAlumnat) !=0){
-                        $pdf->Ln();
-                        $pdf->SetFont('Arial','B',12);
-                        $pdf->Cell(0,10,"Llibres a reposar per l'alumnat");
-                        $pdf->Ln();
-                        $pdf->SetFont('Arial','',10);
-
-                        foreach ($reposarAlumnat as $reposar){
-                                $pdf->Cell(0,10,$reposar);
-                                $pdf->Ln();
-                        }
-                }
-
-
-    	}
-        
     }
-        $pdf->Ln();
-        $fecha=date('d/m/y');
-        $frase = "Informe generat el " . $fecha;
-        $pdf->Cell(0,10,utf8_encode($frase),0,0,"R");
+    //$pdf->SetFont('Arial','B',10);
+    // Trobar el curs en el que estan matriculats
+    $sentencia="select nombre, apellido1, apellido2 from Alumno where id_lote=\"NULL\" and id_tutoria=\"". $_POST['tutoria']."\" and banc_llibres=\"1\"";
+    $alumnesSenseLot=executaSentenciaTotsResultats($conexion,$sentencia);
 
-        */
+    if (count($alumnesSenseLot) != 0){
+
+    	$pdf->SetFont('Arial','B',10);
+    	$pdf->Cell(0,10,"Alumnes sense lot",0,0,"C");
+    	$pdf->Ln();
+    	$pdf->SetFont('Arial','',10);
+
+    	foreach ($alumnesSenseLot as $alumne){
+    		$nombre = utf8_decode($alumne['nombre']). " ". utf8_decode($alumne["apellido1"]). " ". utf8_decode($alumne["apellido2"]);
+    		$pdf->Cell(0,$altura,$nombre);
+    		$pdf->Ln();
+    	}
 
 
-       $pdf->Output();
+    }
+    $pdf->Output();
 
   
 ?>
