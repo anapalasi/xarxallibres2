@@ -9,10 +9,8 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $conexion = conexion($bd_config);
-$sentencia="SELECT id_tutoria, descripcion from Tutoria where id_tutoria like '21_%ESO%' or id_tutoria like '21_%CFB%'";
 
 // Obtenemos las tutorias que tienen libros
-$tutorias = executaSentenciaTotsResultats($conexion, $sentencia);
 
-require 'views/altaAlumno.view.php';
+require 'views/nouLot.view.php';
 

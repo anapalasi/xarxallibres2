@@ -37,9 +37,14 @@
 		$folres=1;
 	else
 		$folres=0;
-	$sql="update Lote set repartit=\"". $repartit."\", folres=\"". $folres . "\", valoracioglobal=\"". $_POST["valoracioglobal"]."\" where id_lote=\"". $_POST["lote"]."\"";
-	$resultat=executaSentencia($conexion, $sql);
+	
+	if (strcmp($_POST["retirat"],"on") == 0)
+		$retirat=1;
+	else
+		$retirat=0;
 
+	$sql="update Lote set repartit=\"". $repartit."\", folres=\"". $folres . "\", valoracioglobal=\"". $_POST["valoracioglobal"]."\", retirat=\"". $retirat. "\" where id_lote=\"". $_POST["lote"]."\"";
+	$resultat=executaSentencia($conexion, $sql);
 	//Actualitzem l'estat de tots els exemplars.
 	for($i=0;$i<count($_POST['ejemplar']);$i++){
 		$sql = "update Ejemplar set puntos  = '".$_POST['estat'][$i]." ' where id_ejemplar = '".$_POST['ejemplar'][$i]."'";
